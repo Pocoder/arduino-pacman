@@ -10,10 +10,11 @@ MCUFRIEND_kbv tft;
 
 #include "GameManager.h"
 #include "OutputManager.h"
+#include "InputManager.h"
 
 OutputManager OManager(&tft);
-GameManager GManager(OManager);
-
+InputManager IManager(&tft);
+GameManager GManager(OManager, IManager);
 
 void setup(void) {
   Serial.begin(9600);
@@ -24,21 +25,17 @@ void setup(void) {
 }
 
 void loop(void) {
-  switch (GManager.getState()) {
-  case State::LOADING:
-    GManager.enterName();
-    break;
-  case State::ENTERING_NAME:
-    break;
-  case State::MENU:
-    break;
-  case State::SETTINGS:
-    break;
-  case State::RECORDS:
-    break;
-  case State::IN_GAME:
-    break;
-  case State::GAME_OVER:
-    break;
-  }
+  //if (GManager.getState() == State::LOADING) {
+  //  GManager.enterName();
+  //}
+  //int16_t xpos, ypos;  //screen coordinates
+  //tp = ts.getPoint();   //tp.x, tp.y are ADC values
+  //
+  //pinMode(XM, OUTPUT);
+  //pinMode(YP, OUTPUT);
+  //if (tp.z > MINPRESSURE && tp.z < MAXPRESSURE) {
+  //  xpos = map(tp.x, TS_LEFT, TS_RT, 0, tft.width());
+  //  ypos = map(tp.y, TS_TOP, TS_BOT, 0, tft.height());
+  //}
+  GManager.update();
 }

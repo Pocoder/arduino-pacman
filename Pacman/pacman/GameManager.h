@@ -1,5 +1,6 @@
 #pragma once
 #include "OutputManager.h"
+#include "InputManager.h"
 
 enum class State {
   LOADING,
@@ -13,7 +14,7 @@ enum class State {
 
 class GameManager {
 public:
-  GameManager(OutputManager& OM) :output(OM) {};          //конструктор
+  GameManager(OutputManager& OM,InputManager& IM) :output(OM),input(IM) {};          //конструктор
 
   void load();            //заставка игры
   void enterName();       //переходит в ввод имени
@@ -30,6 +31,7 @@ public:
   }
 private:
   OutputManager& output;
+  InputManager& input;
 
   State curState;
 };
