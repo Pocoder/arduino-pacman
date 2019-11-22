@@ -15,6 +15,7 @@ class OutputManager {
 public:
   OutputManager(MCUFRIEND_kbv* p);
   void load();
+  void enterName();
 private:
   MCUFRIEND_kbv* tft;
 };

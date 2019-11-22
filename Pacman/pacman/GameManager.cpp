@@ -3,6 +3,9 @@
 void GameManager::load() {
   curState = State::LOADING;
   output.load();
-  delay(3000);
-  enterName();
+}
+
+void GameManager::enterName() {
+  curState = State::ENTERING_NAME;
+  output.enterName();
 }

@@ -20,8 +20,25 @@ void setup(void) {
   uint16_t ID = tft.readID();
   tft.begin(ID);
   GManager.load();
+  delay(1000);
 }
 
 void loop(void) {
-
+  switch (GManager.getState()) {
+  case State::LOADING:
+    GManager.enterName();
+    break;
+  case State::ENTERING_NAME:
+    break;
+  case State::MENU:
+    break;
+  case State::SETTINGS:
+    break;
+  case State::RECORDS:
+    break;
+  case State::IN_GAME:
+    break;
+  case State::GAME_OVER:
+    break;
+  }
 }
