@@ -1,13 +1,9 @@
 #pragma once
-#include <string>
-#include <map>
-#include "InputManager.h"
 #include "OutputManager.h"
-#include "Game.h"
 
 class GameManager {
 public:
-  GameManager();          //конструктор
+  GameManager(OutputManager& OM):output(OM){};          //конструктор
 
   void load();            //заставка игры
   void enterName();       //переходит в ввод имени
@@ -19,7 +15,7 @@ public:
 
   void update();          //считывает нажатие и изменяет состояние игры
 private:
-  std::map<int, std::string> records;
+  OutputManager& output;
 
   enum class State {
     LOADING,
