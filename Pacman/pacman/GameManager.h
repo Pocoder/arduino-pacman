@@ -13,6 +13,11 @@ enum class State {
 };
 
 class GameManager {
+private:
+  void dealKeyboard(TSPoint p);
+  void dealMenuButtons(TSPoint p);
+  void dealSettingsButtons(TSPoint p);
+  
 public:
   GameManager(OutputManager& OM, InputManager& IM) :output(OM), input(IM) {
 
@@ -35,10 +40,6 @@ private:
   OutputManager& output;
   InputManager& input;
 
-  void dealKeyboard(TSPoint p);
-  void dealMenuButtons(TSPoint p);
-  void dealSettingsButtons(TSPoint p);
-  
   MyString name;
   State curState;
 };

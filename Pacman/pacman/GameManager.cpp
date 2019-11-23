@@ -8,6 +8,7 @@ void GameManager::load() {
 
 //entering name
 void GameManager::enterName() {
+  curState = State::ENTERING_NAME;
   output.enterName();
 }
 void GameManager::dealKeyboard(TSPoint p) {
@@ -60,8 +61,16 @@ void GameManager::openSettings() {
   curState = State::SETTINGS;
   output.loadSettings();
 }
-void dealSettingsButtons(TSPoint p) {
-  
+void GameManager::dealSettingsButtons(TSPoint p) {
+  if (p.x>=50 && p.x<=190){
+    if (p.y>=110 && p.y<=170){
+      //change name
+      enterName();
+    }else if (p.y>=185 && p.y<=245){
+      //record table
+      //openRecords();
+    }
+  }
 }
 
 void GameManager::update() {
@@ -80,7 +89,7 @@ void GameManager::update() {
       dealMenuButtons(point);
       break;
     case State::SETTINGS:
-      //dealSettingsButtons(point);
+      dealSettingsButtons(point);
       break;
     case State::RECORDS:
       break;
