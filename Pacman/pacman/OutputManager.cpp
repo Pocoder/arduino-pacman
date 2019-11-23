@@ -111,4 +111,29 @@ void OutputManager::loadSettings() {
   (*tft).print("Record");
   (*tft).setCursor(121 - 5 * 6, 216);
   (*tft).print("table");
+
+  (*tft).setCursor(121 - 2*6*2 , 260);
+  (*tft).setTextSize(2);
+  (*tft).setTextColor(YELLOW);
+  (*tft).print("MENU");
+}
+
+//load Records
+void OutputManager::loadRecords(Records* recs){
+  (*tft).fillScreen(BLACK);
+  (*tft).setCursor(121 - 7*9, 55);
+  (*tft).setTextSize(3);
+  (*tft).setTextColor(YELLOW);
+  (*tft).print("RECORDS");
+  (*tft).setTextSize(2);
+  for (int i = 0;i<(*recs).count;i++){
+    (*tft).setCursor(5, 90+20*i);
+    char* nick = (*recs).recNames[i].str();
+    (*tft).print(nick);
+    delete[] nick;
+    (*tft).setCursor(120, 90+20*i);
+    (*tft).print((*recs).recResults[i]);
+  }
+  (*tft).setCursor(121 - 2*6*2 , 260);
+  (*tft).print("MENU");
 }

@@ -61,6 +61,9 @@ void GameManager::openSettings() {
   output.loadSettings();
 }
 void GameManager::dealSettingsButtons(TSPoint p) {
+  if (p.x >= 97 && p.x<=145 && p.y>= 260 && p.y<=275){
+    openMenu();
+  }
   if (p.x >= 50 && p.x <= 190) {
     if (p.y >= 110 && p.y <= 170) {
       //change name
@@ -68,8 +71,19 @@ void GameManager::dealSettingsButtons(TSPoint p) {
     }
     else if (p.y >= 185 && p.y <= 245) {
       //record table
-      //openRecords();
+      openRecords();
     }
+  }
+}
+
+//records
+void GameManager::openRecords(){
+  curState = State::RECORDS;
+  output.loadRecords(&recs);
+}
+void GameManager::dealRecordsButtons(TSPoint p){
+  if (p.x >= 97 && p.x<=145 && p.y>= 260 && p.y<=275){
+    openMenu();
   }
 }
 
@@ -87,6 +101,7 @@ void GameManager::update() {
     dealSettingsButtons(point);
     break;
   case State::RECORDS:
+    dealRecordsButtons(point);
     break;
   case State::IN_GAME:
     break;

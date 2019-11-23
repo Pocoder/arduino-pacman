@@ -12,6 +12,12 @@
 #define YELLOW  0x001F
 #define WHITE   0x0000
 
+struct Records{
+  MyString recNames[6];
+  int recResults[6];
+  int count = 0;
+};
+
 class OutputManager {
 public:
   OutputManager(MCUFRIEND_kbv* p);
@@ -21,6 +27,7 @@ public:
   void writeName(MyString& name); //showing name
   void loadMenu();
   void loadSettings();
+  void loadRecords(Records* recs);
 private:
   MCUFRIEND_kbv* tft;
 };
