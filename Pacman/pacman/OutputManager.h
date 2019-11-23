@@ -19,6 +19,8 @@ public:
   void load(); //loading screen
   void enterName(); //back of entering name
   void writeName(MyString& name); //showing name
+  void loadMenu(); 
+  void loadSettings();
 private:
   MCUFRIEND_kbv* tft;
 };

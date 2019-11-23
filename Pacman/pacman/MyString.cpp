@@ -48,6 +48,17 @@ char& MyString::operator[](int index) {
   return data[index];
 }
 
+void MyString::copy(char* mas, int n) {
+  delete[] data;
+  size = n;
+  capacity = n;
+  data = new char[n + 1];
+  for (int i = 0; i < n;i++) {
+    data[i] = mas[i];
+  }
+  data[n] = '\0';
+}
+
 char* MyString::getData() {
   return data;
 }

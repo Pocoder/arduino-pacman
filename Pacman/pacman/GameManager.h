@@ -22,7 +22,7 @@ public:
   void enterName();       //переходит в ввод имени
   void openMenu();        //переходит в меню
   void startGame();       //начинает новую игру
-  void openSettengs();    //открывает настройки
+  void openSettings();    //открывает настройки
   void openRecords();     //открывает топ игроков
   void gameOver();        //заканчиывает игру
 
@@ -36,7 +36,9 @@ private:
   InputManager& input;
 
   void dealKeyboard(TSPoint p);
-
+  void dealMenuButtons(TSPoint p);
+  void dealSettingsButtons(TSPoint p);
+  
   MyString name;
   State curState;
 };
