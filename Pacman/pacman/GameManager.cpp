@@ -4,11 +4,13 @@
 void GameManager::load() {
   curState = State::LOADING;
   output.load();
+  enterName();
 }
 
 //entering name
 void GameManager::enterName() {
-  output.enterName();
+  curState = State::ENTERING_NAME;
+  output.enterName(name);
 }
 void GameManager::dealKeyboard(TSPoint p) {
   if (p.x >= 240 - 96 && p.x <= 240 - 48 && p.y >= 320 - 24) { //backspace
@@ -16,10 +18,9 @@ void GameManager::dealKeyboard(TSPoint p) {
     output.writeName(name);
   }
   else if (p.x > 240 - 48 && p.y >= 320 - 24) { //OK
-    curState = State::MENU;
     openMenu();
   }
-  else if (name.getSize() < 6) { 
+  else if (name.getSize() < 6) {
     if (p.y >= 320 - 72) { //letters
       int x = p.x / 24;
       int y = (p.y - (320 - 72)) / 24;
@@ -41,40 +42,55 @@ void GameManager::openMenu() {
   curState = State::MENU;
   output.loadMenu();
 }
-void GameManager::dealMenuButtons(TSPoint p){
-  if (p.x>=50 && p.x<=190){
-    if (p.y>=110 && p.y<=170){
+void GameManager::dealMenuButtons(TSPoint p) {
+  if (p.x >= 50 && p.x <= 190) {
+    if (p.y >= 110 && p.y <= 170) {
       //play
-      startGame();
-    }else if (p.y>=185 && p.y<=245){
+      //startGame();
+    }
+    else if (p.y >= 185 && p.y <= 245) {
       //settings
       openSettings();
     }
   }
 }
 
-void GameManager::update() {
-  if (curState == State::LOADING) {
-    curState = State::ENTERING_NAME;
-    enterName();
-  }
-  else {
-    TSPoint point = input.get();
-    switch (curState) {
-    case State::ENTERING_NAME:
-      dealKeyboard(point);
-      delay(130);
-      break;
-    case State::MENU:
-      break;
-    case State::SETTINGS:
-      break;
-    case State::RECORDS:
-      break;
-    case State::IN_GAME:
-      break;
-    case State::GAME_OVER:
-      break;
+//settings
+void GameManager::openSettings() {
+  curState = State::SETTINGS;
+  output.loadSettings();
+}
+void GameManager::dealSettingsButtons(TSPoint p) {
+  if (p.x >= 50 && p.x <= 190) {
+    if (p.y >= 110 && p.y <= 170) {
+      //change name
+      enterName();
     }
+    else if (p.y >= 185 && p.y <= 245) {
+      //record table
+      //openRecords();
+    }
+  }
+}
+
+void GameManager::update() {
+  TSPoint point = input.get();
+  switch (curState) {
+  case State::ENTERING_NAME:
+    dealKeyboard(point);
+    delay(130);
+    break;
+  case State::MENU:
+    dealMenuButtons(point);
+    break;
+  case State::SETTINGS:
+    dealSettingsButtons(point);
+    break;
+  case State::RECORDS:
+    break;
+  case State::IN_GAME:
+    break;
+  case State::GAME_OVER:
+    break;
   }
 }

@@ -17,9 +17,10 @@ public:
   OutputManager(MCUFRIEND_kbv* p);
 
   void load(); //loading screen
-  void enterName(); //back of entering name
+  void enterName(MyString& name); //back of entering name
   void writeName(MyString& name); //showing name
-  void loadMenu(); 
+  void loadMenu();
+  void loadSettings();
 private:
   MCUFRIEND_kbv* tft;
 };

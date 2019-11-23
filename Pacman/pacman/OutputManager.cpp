@@ -23,7 +23,7 @@ void OutputManager::load() {
 }
 
 //entering name
-void OutputManager::enterName() {
+void OutputManager::enterName(MyString& name) {
   (*tft).fillScreen(BLACK);
   (*tft).setCursor(83, 70);
   (*tft).setTextColor(YELLOW);
@@ -57,6 +57,7 @@ void OutputManager::enterName() {
   (*tft).setTextSize(2);
   (*tft).setTextColor(YELLOW);
   (*tft).print("OK");
+  writeName(name);
 }
 void OutputManager::writeName(MyString& name) {
   (*tft).fillRect(0, 140, 240, 45, BLACK);
@@ -76,14 +77,38 @@ void OutputManager::loadMenu() {
   int16_t radius = 7;
   (*tft).setCursor(121 - 2 * 18, 55);
   (*tft).setTextSize(3);
-  (*tft).setTextColor(YELLOW,BLACK);
+  (*tft).setTextColor(YELLOW, BLACK);
   (*tft).print("MENU");
-  (*tft).fillRoundRect(50,110,width,high,radius,YELLOW);
-  (*tft).fillRoundRect(50,185,width,high,radius,YELLOW);
+  (*tft).fillRoundRect(50, 110, width, high, radius, YELLOW);
+  (*tft).fillRoundRect(50, 185, width, high, radius, YELLOW);
   (*tft).setTextSize(2);
   (*tft).setTextColor(BLACK);
-  (*tft).setCursor(121 - 2*6*2, 133);
+  (*tft).setCursor(121 - 2 * 6 * 2, 133);
   (*tft).print("PLAY");
-  (*tft).setCursor(121 - 2*6*4, 208);
+  (*tft).setCursor(121 - 2 * 6 * 4, 208);
   (*tft).print("Settings");
+}
+
+//load settings
+void OutputManager::loadSettings() {
+  (*tft).fillScreen(BLACK);
+  int16_t width = 140;
+  int16_t high = 60;
+  int16_t radius = 7;
+  (*tft).setCursor(121 - 4 * 6 * 3, 55);
+  (*tft).setTextSize(3);
+  (*tft).setTextColor(YELLOW);
+  (*tft).print("SETTINGS");
+  (*tft).fillRoundRect(50, 110, width, high, radius, YELLOW);
+  (*tft).fillRoundRect(50, 185, width, high, radius, YELLOW);
+  (*tft).setTextSize(2);
+  (*tft).setTextColor(BLACK);
+  (*tft).setCursor(121 - 3 * 2 * 6, 125);
+  (*tft).print("Change");
+  (*tft).setCursor(121 - 2 * 2 * 6, 141);
+  (*tft).print("name");
+  (*tft).setCursor(121 - 3 * 6 * 2, 200);
+  (*tft).print("Record");
+  (*tft).setCursor(121 - 5 * 6, 216);
+  (*tft).print("table");
 }
