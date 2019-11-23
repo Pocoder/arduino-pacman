@@ -41,6 +41,17 @@ void GameManager::openMenu() {
   curState = State::MENU;
   output.loadMenu();
 }
+void GameManager::dealMenuButtons(TSPoint p){
+  if (p.x>=50 && p.x<=190){
+    if (p.y>=110 && p.y<=170){
+      //play
+      startGame();
+    }else if (p.y>=185 && p.y<=245){
+      //settings
+      openSettings();
+    }
+  }
+}
 
 void GameManager::update() {
   if (curState == State::LOADING) {
