@@ -39,7 +39,7 @@ public:
 private:
   OutputManager& output;
   InputManager& input;
-
+  
   MyString name;
   State curState;
 };

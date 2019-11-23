@@ -8,7 +8,6 @@ void GameManager::load() {
 
 //entering name
 void GameManager::enterName() {
-  curState = State::ENTERING_NAME;
   output.enterName();
 }
 void GameManager::dealKeyboard(TSPoint p) {
@@ -17,9 +16,6 @@ void GameManager::dealKeyboard(TSPoint p) {
     output.writeName(name);
   }
   else if (p.x > 240 - 48 && p.y >= 320 - 24) { //OK
-    if (name.getSize()==0){
-      name.copy("Player\0",6);
-    }
     openMenu();
   }
   else if (name.getSize() < 6) { 
