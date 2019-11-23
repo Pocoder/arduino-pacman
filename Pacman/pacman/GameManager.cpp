@@ -48,7 +48,7 @@ void GameManager::update() {
     switch (curState) {
     case State::ENTERING_NAME:
       dealKeyboard(point);
-      delay(70);
+      delay(130);
       break;
     case State::MENU:
       break;

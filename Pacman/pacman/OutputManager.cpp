@@ -59,7 +59,7 @@ void OutputManager::enterName() {
   (*tft).print("OK");
 }
 void OutputManager::writeName(MyString& name) {
-  (*tft).fillRect(0, 140, 240, 30, BLACK);
+  (*tft).fillRect(0, 140, 240, 45, BLACK);
   (*tft).setCursor(120 - name.getSize() * 8, 150);
   (*tft).setTextColor(YELLOW);
   (*tft).setTextSize(3);
