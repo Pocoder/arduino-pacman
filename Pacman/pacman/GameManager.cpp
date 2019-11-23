@@ -1,14 +1,42 @@
 #include "GameManager.h"
 
+//loading
 void GameManager::load() {
   curState = State::LOADING;
   output.load();
 }
 
+//entering name
 void GameManager::enterName() {
   curState = State::ENTERING_NAME;
   output.enterName();
 }
+void GameManager::dealKeyboard(TSPoint p) {
+  if (p.x >= 240 - 96 && p.x <= 240 - 48 && p.y >= 320 - 24) { //backspace
+    name.backspace();
+    output.writeName(name);
+  }
+  else if (p.x > 240 - 48 && p.y >= 320 - 24) { //OK
+    ///TODO OK
+  }
+  else if (name.getSize() < 6) { 
+    if (p.y >= 320 - 72) { //letters
+      int x = p.x / 24;
+      int y = (p.y - (320 - 72)) / 24;
+      char c;
+      if (name.getSize() == 0) {
+        c = 'A' + 10 * y + x;
+      }
+      else {
+        c = 'a' + 10 * y + x;
+      }
+      name.push(c);
+      output.writeName(name);
+    }
+  }
+}
+
+
 
 void GameManager::update() {
   if (curState == State::LOADING) {
@@ -16,9 +44,11 @@ void GameManager::update() {
     enterName();
   }
   else {
-    TSPoint point = input.getPoint();
+    TSPoint point = input.get();
     switch (curState) {
     case State::ENTERING_NAME:
+      dealKeyboard(point);
+      delay(70);
       break;
     case State::MENU:
       break;

@@ -1,6 +1,7 @@
 #pragma once
 #include "Adafruit_GFX.h"
 #include <MCUFRIEND_kbv.h>
+#include "MyString.h"
 
 #define BLACK   0xFFFF
 #define BLUE    0xFFE0
@@ -14,8 +15,10 @@
 class OutputManager {
 public:
   OutputManager(MCUFRIEND_kbv* p);
-  void load();
-  void enterName();
+
+  void load(); //loading screen
+  void enterName(); //back of entering name
+  void writeName(MyString& name); //showing name
 private:
   MCUFRIEND_kbv* tft;
 };

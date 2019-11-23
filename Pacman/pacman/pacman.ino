@@ -12,30 +12,22 @@ MCUFRIEND_kbv tft;
 #include "OutputManager.h"
 #include "InputManager.h"
 
+const int XP = 6, XM = A2, YP = A1, YM = 7; 
+TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
+
 OutputManager OManager(&tft);
-InputManager IManager(&tft);
+InputManager IManager(&tft, &ts);
 GameManager GManager(OManager, IManager);
+
 
 void setup(void) {
   Serial.begin(9600);
   uint16_t ID = tft.readID();
   tft.begin(ID);
   GManager.load();
-  delay(1000);
+  //delay(1000);
 }
 
 void loop(void) {
-  //if (GManager.getState() == State::LOADING) {
-  //  GManager.enterName();
-  //}
-  //int16_t xpos, ypos;  //screen coordinates
-  //tp = ts.getPoint();   //tp.x, tp.y are ADC values
-  //
-  //pinMode(XM, OUTPUT);
-  //pinMode(YP, OUTPUT);
-  //if (tp.z > MINPRESSURE && tp.z < MAXPRESSURE) {
-  //  xpos = map(tp.x, TS_LEFT, TS_RT, 0, tft.width());
-  //  ypos = map(tp.y, TS_TOP, TS_BOT, 0, tft.height());
-  //}
   GManager.update();
 }

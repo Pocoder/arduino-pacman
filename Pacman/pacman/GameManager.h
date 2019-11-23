@@ -14,7 +14,9 @@ enum class State {
 
 class GameManager {
 public:
-  GameManager(OutputManager& OM,InputManager& IM) :output(OM),input(IM) {};          //конструктор
+  GameManager(OutputManager& OM, InputManager& IM) :output(OM), input(IM) {
+
+  };          //конструктор
 
   void load();            //заставка игры
   void enterName();       //переходит в ввод имени
@@ -33,5 +35,8 @@ private:
   OutputManager& output;
   InputManager& input;
 
+  void dealKeyboard(TSPoint p);
+
+  MyString name;
   State curState;
 };
