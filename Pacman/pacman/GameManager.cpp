@@ -8,7 +8,6 @@ void GameManager::load() {
 
 //entering name
 void GameManager::enterName() {
-  curState = State::ENTERING_NAME;
   output.enterName();
 }
 void GameManager::dealKeyboard(TSPoint p) {
@@ -17,7 +16,8 @@ void GameManager::dealKeyboard(TSPoint p) {
     output.writeName(name);
   }
   else if (p.x > 240 - 48 && p.y >= 320 - 24) { //OK
-    ///TODO OK
+    curState = State::MENU;
+    openMenu();
   }
   else if (name.getSize() < 6) { 
     if (p.y >= 320 - 72) { //letters
@@ -36,7 +36,22 @@ void GameManager::dealKeyboard(TSPoint p) {
   }
 }
 
-
+//menu
+void GameManager::openMenu() {
+  curState = State::MENU;
+  output.loadMenu();
+}
+void GameManager::dealMenuButtons(TSPoint p){
+  if (p.x>=50 && p.x<=190){
+    if (p.y>=110 && p.y<=170){
+      //play
+      startGame();
+    }else if (p.y>=185 && p.y<=245){
+      //settings
+      openSettings();
+    }
+  }
+}
 
 void GameManager::update() {
   if (curState == State::LOADING) {

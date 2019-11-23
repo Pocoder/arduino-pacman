@@ -36,7 +36,8 @@ private:
   InputManager& input;
 
   void dealKeyboard(TSPoint p);
-
+  void dealMenuButtons(TSPoint p);
+  
   MyString name;
   State curState;
 };
