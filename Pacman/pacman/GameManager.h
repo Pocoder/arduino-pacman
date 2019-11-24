@@ -1,6 +1,7 @@
 #pragma once
 #include "OutputManager.h"
 #include "InputManager.h"
+#include "Game.h"
 
 enum class State {
   LOADING,
@@ -41,13 +42,16 @@ private:
   void dealMenuButtons(TSPoint p);
   void dealSettingsButtons(TSPoint p);
   void dealRecordsButtons(TSPoint p);
+  void dealGameButtons(TSPoint p);
+  void dealGameOverButtons(TSPoint p);
 
   OutputManager& output;
   InputManager& input;
 
   Records recs;
 
-   MyString na;
+  Game game;
+  MyString na;
   MyString name;
   State curState;
 };

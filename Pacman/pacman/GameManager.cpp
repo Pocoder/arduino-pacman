@@ -46,7 +46,7 @@ void GameManager::dealMenuButtons(TSPoint p) {
   if (p.x >= 50 && p.x <= 190) {
     if (p.y >= 110 && p.y <= 170) {
       //play
-      //startGame();
+      startGame();
     }
     else if (p.y >= 185 && p.y <= 245) {
       //settings
@@ -87,6 +87,30 @@ void GameManager::dealRecordsButtons(TSPoint p){
   }
 }
 
+//game
+void GameManager::startGame(){
+  curState=State::IN_GAME;
+  output.loadGame();
+}
+void GameManager::dealGameButtons(TSPoint p){
+  if (game.isGameOver()){
+    gameOver();
+  }else{
+    game.update(p);
+  }
+}
+
+//gameOver
+void GameManager::gameOver(){
+  curState = State::GAME_OVER;
+  output.loadGameOver();
+}
+void GameManager::dealGameOverButtons(TSPoint p){
+  if (p.x>=50 && p.x<=190 && p.y>=130 && p.y<=190){
+    openMenu();
+  }
+}
+
 void GameManager::update() {
   TSPoint point = input.get();
   switch (curState) {
@@ -104,8 +128,10 @@ void GameManager::update() {
     dealRecordsButtons(point);
     break;
   case State::IN_GAME:
+    dealGameButtons(point);
     break;
   case State::GAME_OVER:
+    dealGameOverButtons(point);
     break;
   }
 }

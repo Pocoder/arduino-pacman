@@ -64,9 +64,7 @@ void OutputManager::writeName(MyString& name) {
   (*tft).setCursor(120 - name.getSize() * 8, 150);
   (*tft).setTextColor(YELLOW);
   (*tft).setTextSize(3);
-  char* res = name.str();
-  (*tft).println(res);
-  delete[] res;
+  (*tft).println(name.str());
 }
 
 //load menu
@@ -128,12 +126,28 @@ void OutputManager::loadRecords(Records* recs){
   (*tft).setTextSize(2);
   for (int i = 0;i<(*recs).count;i++){
     (*tft).setCursor(5, 90+20*i);
-    char* nick = (*recs).recNames[i].str();
-    (*tft).print(nick);
-    delete[] nick;
+    (*tft).print((*recs).recNames[i].str());
     (*tft).setCursor(120, 90+20*i);
     (*tft).print((*recs).recResults[i]);
   }
   (*tft).setCursor(121 - 2*6*2 , 260);
   (*tft).print("MENU");
+}
+
+//load Game
+void OutputManager::loadGame(){
+  (*tft).fillScreen(YELLOW);
+}
+
+void OutputManager::loadGameOver(){
+  (*tft).fillScreen(BLACK);
+  int16_t width = 140;
+  int16_t high = 60;
+  int16_t radius = 7;
+  (*tft).fillRoundRect(50, 130, width, high, radius, YELLOW);
+  (*tft).setCursor(121 - 2*6*2, 153);
+  (*tft).setTextSize(2);
+  (*tft).setTextColor(BLACK);
+  (*tft).print("MENU");
+  
 }

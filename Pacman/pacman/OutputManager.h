@@ -28,6 +28,8 @@ public:
   void loadMenu();
   void loadSettings();
   void loadRecords(Records* recs);
+  void loadGame();
+  void loadGameOver();
 private:
   MCUFRIEND_kbv* tft;
 };
