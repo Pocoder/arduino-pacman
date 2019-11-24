@@ -15,16 +15,8 @@ enum class State {
 
 class GameManager {
 public:
-  GameManager(OutputManager& OM, InputManager& IM) :output(OM), input(IM) {
+  GameManager(OutputManager& OM, InputManager& IM) :output(OM), input(IM), game(OM) {
     name.copy("Player\0", 6);
-    recs.count = 3;
-    na.copy("Hima\0",4);
-    recs.recNames[0] = na;
-    recs.recNames[1] = name;
-    recs.recNames[2] = na;
-    recs.recResults[0] = 100;
-    recs.recResults[1] = 50;
-    recs.recResults[2] = 20;
   };          //конструктор
 
   void load();            //заставка игры
@@ -51,7 +43,6 @@ private:
   Records recs;
 
   Game game;
-  MyString na;
   MyString name;
   State curState;
 };
