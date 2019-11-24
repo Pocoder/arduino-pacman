@@ -116,13 +116,15 @@ void GameManager::update() {
   switch (curState) {
   case State::ENTERING_NAME:
     dealKeyboard(point);
-    delay(130);
+    delay(150);
     break;
   case State::MENU:
     dealMenuButtons(point);
+    delay(150);
     break;
   case State::SETTINGS:
     dealSettingsButtons(point);
+    delay(150);
     break;
   case State::RECORDS:
     dealRecordsButtons(point);

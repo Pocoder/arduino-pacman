@@ -89,7 +89,8 @@ void OutputManager::loadMenu() {
 
 //load settings
 void OutputManager::loadSettings() {
-  (*tft).fillScreen(BLACK);
+  //закрашиваем надпись "меню"
+  (*tft).fillRect(40, 50, 150, 50, BLACK);
   int16_t width = 140;
   int16_t high = 60;
   int16_t radius = 7;
@@ -97,8 +98,9 @@ void OutputManager::loadSettings() {
   (*tft).setTextSize(3);
   (*tft).setTextColor(YELLOW);
   (*tft).print("SETTINGS");
-  (*tft).fillRoundRect(50, 110, width, high, radius, YELLOW);
-  (*tft).fillRoundRect(50, 185, width, high, radius, YELLOW);
+  //закрашиваем надписи "play" и "settings"
+  (*tft).fillRect(121 - 24, 133, 50, 15, YELLOW);
+  (*tft).fillRect(121 - 48, 208, 100, 15, YELLOW);
   (*tft).setTextSize(2);
   (*tft).setTextColor(BLACK);
   (*tft).setCursor(121 - 3 * 2 * 6, 125);
