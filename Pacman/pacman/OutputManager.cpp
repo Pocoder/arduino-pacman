@@ -1,5 +1,7 @@
 #include "OutputManager.h"
 
+extern const unsigned char pacmanMap[30][40];
+
 OutputManager::OutputManager(MCUFRIEND_kbv* p) {
   tft = p;
 }
@@ -211,6 +213,9 @@ void OutputManager::loadGame(){
       int x = 8*i+3;
       int y = 8*j+3;
       if (pacmanMap[i][j]==2){
+        Serial.println(i);
+        Serial.println(j);
+        
         (*tft).fillRect(x, y,2,2, WHITE);
         (*tft).fillRect(238-x, y,2,2, WHITE);
       } else

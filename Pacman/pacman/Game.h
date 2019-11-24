@@ -1,6 +1,5 @@
 #include <TouchScreen.h>
 #include "OutputManager.h"
-#include "Textures.h"
 
 class Game{
 public:
