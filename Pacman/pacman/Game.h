@@ -1,5 +1,6 @@
 #include <TouchScreen.h>
 #include "OutputManager.h"
+#include "Textures.h"
 
 class Game{
 public:
@@ -9,8 +10,11 @@ public:
     return gameOver;
   }
   void update(TSPoint p){
-    delay(2000);
+    delay(100000);
     gameOver = true;
+  }
+  void start(){
+    gameOver = false;
   }
 private:
   bool gameOver = false;

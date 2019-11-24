@@ -99,8 +99,8 @@ void OutputManager::loadSettings() {
   (*tft).setTextColor(YELLOW);
   (*tft).print("SETTINGS");
   //закрашиваем надписи "play" и "settings"
-  (*tft).fillRect(121 - 24, 133, 50, 15, YELLOW);
-  (*tft).fillRect(121 - 48, 208, 100, 15, YELLOW);
+  (*tft).fillRect(121 - 24, 133, 50, 17, YELLOW);
+  (*tft).fillRect(121 - 48, 208, 100, 17, YELLOW);
   (*tft).setTextSize(2);
   (*tft).setTextColor(BLACK);
   (*tft).setCursor(121 - 3 * 2 * 6, 125);
@@ -136,9 +136,90 @@ void OutputManager::loadRecords(Records* recs){
   (*tft).print("MENU");
 }
 
-//load Game
+//Game
 void OutputManager::loadGame(){
-  (*tft).fillScreen(YELLOW);
+  (*tft).fillScreen(BLACK);
+  //ramka
+  (*tft).drawFastVLine(8, 32, 247, BLUE);
+  (*tft).drawFastVLine(10, 34, 243, BLUE);
+  (*tft).drawFastVLine(229, 34, 243, BLUE);
+  (*tft).drawFastVLine(231, 32, 247, BLUE);
+  (*tft).drawFastHLine(8, 32, 223, BLUE);
+  (*tft).drawFastHLine(10, 34, 219, BLUE);
+  (*tft).drawFastHLine(10, 277, 219, BLUE);
+  (*tft).drawFastHLine(8, 279,223, BLUE);
+
+  int radius = 3;
+  (*tft).drawRoundRect(117, 34, 5, 32,radius, BLUE); // верхний центральный
+  (*tft).drawRoundRect(8, 109, 42, 29,radius, BLUE); //левый верхний
+  (*tft).drawRoundRect(8, 157, 42, 29,radius, BLUE); // левый центральный
+  (*tft).drawRoundRect(8, 229, 21, 5,radius, BLUE); // левый нижний
+  (*tft).drawRoundRect(189, 109, 42, 29,radius, BLUE); // првый вехрний
+  (*tft).drawRoundRect(189, 157, 42, 29,radius, BLUE); // правый центральный
+  (*tft).drawRoundRect(210, 229, 21, 5,radius, BLUE); // правый нижний
+  (*tft).fillRect(8, 139, 6,17 ,BLACK);
+  (*tft).fillRect(225, 139, 7, 17,BLACK);
+  
+  //top rectangles
+  (*tft).drawRoundRect(29, 53, 21, 13,radius, BLUE);
+  (*tft).drawRoundRect(69, 53, 29, 13,radius, BLUE);
+  (*tft).drawRoundRect(141, 53, 29, 13,radius, BLUE);
+  (*tft).drawRoundRect(189, 53, 21, 13,radius, BLUE);
+  (*tft).drawRoundRect(29, 85, 21, 5,radius, BLUE);
+  (*tft).drawRoundRect(189, 85, 21, 5,radius, BLUE);  
+  //top mnogogranniki
+  (*tft).drawRoundRect(69, 85, 5, 53,radius, BLUE);
+  (*tft).drawRoundRect(72, 109, 26, 5, radius, BLUE);
+  (*tft).drawRoundRect(93, 85, 53, 5,radius, BLUE);
+  (*tft).drawRoundRect(117, 88, 5, 26,radius, BLUE);
+  (*tft).drawRoundRect(165, 85, 5, 53,radius, BLUE);
+  (*tft).drawRoundRect(141, 109, 26, 5,radius, BLUE); 
+     //
+  (*tft).fillRect(70, 110, 6, 3,BLACK);
+  (*tft).fillRect(118, 88, 3, 5,BLACK);
+  (*tft).fillRect(164, 110, 5, 3,BLACK); 
+
+  //prison
+  (*tft).drawRect(93, 133, 21, 3, WHITE);
+  (*tft).drawRect(93, 133, 3, 26, WHITE);
+  (*tft).drawRect(93, 157, 53, 3, WHITE);
+  (*tft).drawRect(125, 133, 21, 3, WHITE);
+  (*tft).drawRect(144, 133, 3, 26, WHITE);
+
+  //bot monogogranniki
+  (*tft).drawRoundRect(69, 157, 5, 29,radius, BLUE); 
+  (*tft).drawRoundRect(165, 157, 5, 29,radius, BLUE); 
+  (*tft).drawRoundRect(69, 205, 29,  5,radius, BLUE); 
+  (*tft).drawRoundRect(141, 205, 29, 5,radius, BLUE); 
+
+  (*tft).drawRoundRect(29, 205, 21, 5,radius, BLUE);
+  (*tft).drawRoundRect(189, 205, 21, 5,radius, BLUE);
+  (*tft).drawRoundRect(93, 181, 53, 5,radius, BLUE);
+  (*tft).drawRoundRect(93, 229, 53, 5,radius, BLUE);
+  (*tft).drawRoundRect(29, 253, 69, 5,radius, BLUE);
+  (*tft).drawRoundRect(141, 253, 69, 5,radius, BLUE);
+  
+  (*tft).drawRoundRect(45, 205, 5, 29,radius, BLUE);
+  (*tft).drawRoundRect(189, 205, 5, 29,radius, BLUE);
+  (*tft).drawRoundRect(117, 181, 5, 29,radius, BLUE);
+  (*tft).drawRoundRect(117, 229, 5, 29,radius, BLUE);
+  (*tft).drawRoundRect(69, 229, 5, 29,radius, BLUE);
+  (*tft).drawRoundRect(165, 229, 5, 29,radius, BLUE);
+
+  for (int j = 0;j<40;j++){
+    for (int i = 0;i<15;i++){
+      int x = 8*i+3;
+      int y = 8*j+3;
+      if (pacmanMap[i][j]==2){
+        (*tft).fillRect(x, y,2,2, WHITE);
+        (*tft).fillRect(238-x, y,2,2, WHITE);
+      } else
+      if (pacmanMap[i][j]==3){
+        (*tft).fillCircle(19, y, 2, WHITE);
+        (*tft).fillCircle(219, y, 2, WHITE);
+      }
+    }
+  }
 }
 
 void OutputManager::loadGameOver(){
