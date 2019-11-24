@@ -11,6 +11,7 @@ public:
   //Потеря владения (плохо), не забыть удалить в другом месте
   char* str();
   char& operator[](int index);
+  void operator=(const MyString& rhv);
   void copy(const char* mas, int n);
 
   char* getData();

@@ -37,15 +37,33 @@ void MyString::backspace() {
 }
 //Потеря владения (плохо), не забыть удалить в другом месте
 char* MyString::str() {
-  char* result = new char[size + 1];
-  for (int i = 0; i < size; i++) {
-    result[i] = data[i];
+  if (size==capacity){
+    return data;
   }
-  result[size] = '\0';
-  return result;
+  char* result = data;
+  data = new char[size+1];
+  for (int i = 0; i < size; i++) {
+    data[i] = result[i];
+  }
+  data[size] = '\0';
+  delete[] result;
+  capacity = size;
+  return data;
 }
 char& MyString::operator[](int index) {
   return data[index];
+}
+void MyString::operator=(const MyString& rhv){
+  if (this !=&rhv){
+    size = rhv.getSize();
+    capacity = size;
+    delete[] data;
+    data = new char[size+1];
+    for (int i = 0;i<size;i++){
+      data[i] = rhv.data[i];
+    }
+    data[size] = '\0';
+  }
 }
 
 void MyString::copy(const char* mas, int n) {

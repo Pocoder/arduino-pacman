@@ -2,6 +2,7 @@
 #include "Adafruit_GFX.h"
 #include <MCUFRIEND_kbv.h>
 #include "MyString.h"
+#include "Textures.h"
 
 #define BLACK   0xFFFF
 #define BLUE    0xFFE0
@@ -28,6 +29,8 @@ public:
   void loadMenu();
   void loadSettings();
   void loadRecords(Records* recs);
+  void loadGame();
+  void loadGameOver();
 private:
   MCUFRIEND_kbv* tft;
 };
