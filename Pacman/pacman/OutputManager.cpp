@@ -1,6 +1,5 @@
 #include "OutputManager.h"
-
-extern const unsigned char pacmanMap[30][40];
+#include "Textures.cpp"
 
 OutputManager::OutputManager(MCUFRIEND_kbv* p) {
   tft = p;
@@ -27,6 +26,9 @@ void OutputManager::load() {
 //entering name
 void OutputManager::enterName(MyString& name) {
   (*tft).fillScreen(BLACK);
+  (*tft).drawBitmap(0,0, pacman1, 16,16,YELLOW);
+  (*tft).drawBitmap(32,0, pacman2, 16,16,YELLOW);
+  (*tft).drawBitmap(65,0, pacman3, 16,16,YELLOW);
   (*tft).setCursor(83, 70);
   (*tft).setTextColor(YELLOW);
   (*tft).setTextSize(3);
