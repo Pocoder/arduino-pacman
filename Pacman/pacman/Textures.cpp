@@ -54,8 +54,8 @@ const uint8_t pacman3[]PROGMEM = {
  0x7f,0xfe,
  0x3f,0xfC,
  0x3f,0xfC,
- 0x03,0xC0,
- 0x0f,0xf0
+ 0x0f,0xf0,
+ 0x03,0xC0
 };
 const uint8_t pacmanMap[30][40] = {                         //ent
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},//0 +
