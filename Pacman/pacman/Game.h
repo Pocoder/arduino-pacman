@@ -14,7 +14,9 @@ public:
   void start();
   void startNewLevel();
 private:
+  bool trouble = false;
   Direction curDir = Direction::RIGHT;
+  Direction prevDir = Direction::RIGHT;
   double curX = 14;
   double curY = 27;
   int points = 0;
