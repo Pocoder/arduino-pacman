@@ -227,11 +227,39 @@ void OutputManager::loadGame(){
 
   //pacman
   (*tft).drawBitmap(8*14-4, 8*27-4, pacman3,16,16, YELLOW);
+
+  (*tft).setCursor(10, 290);
+  (*tft).setTextSize(2);
+  (*tft).setTextColor(YELLOW);
+  (*tft).print("Points");
+
+  (*tft).setCursor(90, 290);
+  (*tft).print("0");
+
+  (*tft).drawBitmap(180,290 , pacman1,16,16, YELLOW);
+  (*tft).drawBitmap(200,290 , pacman1,16,16, YELLOW);
+  (*tft).drawBitmap(220,290 , pacman1,16,16, YELLOW);
 }
 
-void OutputManager::refreshText(int oldX,int oldY, int newX,int newY){
+void OutputManager::refreshPacman(int oldX,int oldY, int newX,int newY){
   (*tft).drawBitmap(oldX-4, oldY-4, pacman3,16,16, BLACK);
   (*tft).drawBitmap(newX-4, newY-4, pacman3,16,16, YELLOW);
+}
+
+void OutputManager::refreshPoints(int value){
+  (*tft).fillRect(90, 290, 80, 25 ,BLACK);
+  (*tft).setTextSize(2);
+  (*tft).setCursor(90, 290);
+  (*tft).print(value);
+}
+
+void OutputManager::refreshLives(int value){
+  if (value == 2)
+    (*tft).fillRect(220, 290, 16,16 ,BLACK);
+  if (value == 1)
+    (*tft).fillRect(200, 290, 16,16 ,BLACK);
+  if (value == 0)
+    (*tft).fillRect(180, 290, 16,16 ,BLACK);
 }
 
 void OutputManager::loadGameOver(){

@@ -1,6 +1,10 @@
 #include "Game.h"
 
 void Game::update(TSPoint p){
+  if (pacmanMap[char(curX-0.25)][char(curY)]==2){
+    points+=10;
+    output.refreshPoints(points);
+  }
   if (p.x>0 && p.x<120 && p.y<240 &&p.y>80){
     curDir = Direction::LEFT;
   }
@@ -22,7 +26,7 @@ void Game::update(TSPoint p){
   switch (curDir){
     case Direction::LEFT:
       if (pacmanMap[char(curX-0.25)][char(curY)]!=1 && pacmanMap[char(curX-0.25)][char(curY+0.875)]!=1){
-        output.refreshText(8*curX,8*curY,8*(curX-0.25),8*curY);
+        output.refreshPacman(8*curX,8*curY,8*(curX-0.25),8*curY);
         curX-=0.25;
         trouble = false;
       } else
@@ -30,7 +34,7 @@ void Game::update(TSPoint p){
       break;
     case Direction::RIGHT:
       if (pacmanMap[char(curX+1)][char(curY)]!=1 && pacmanMap[char(curX+1)][char(curY+0.875)]!=1){
-        output.refreshText(8*curX,8*curY,8*(curX+0.25),8*curY);
+        output.refreshPacman(8*curX,8*curY,8*(curX+0.25),8*curY);
         curX+=0.25;
         trouble = false;
       } else
@@ -38,7 +42,7 @@ void Game::update(TSPoint p){
       break;
     case Direction::TOP:
       if (pacmanMap[char(curX)][char(curY-0.25)]!=1 && pacmanMap[char(curX+0.875)][char(curY-0.25)]!=1){
-        output.refreshText(8*curX,8*curY,8*curX,8*(curY-0.25));
+        output.refreshPacman(8*curX,8*curY,8*curX,8*(curY-0.25));
         curY-=0.25;
         trouble = false;
       } else
@@ -46,7 +50,7 @@ void Game::update(TSPoint p){
       break;
     case Direction::DOWN:
       if (pacmanMap[char(curX)][char(curY+1.125)]!=1 && pacmanMap[char(curX+0.875)][char(curY+1.125)]!=1){
-        output.refreshText(8*curX,8*curY,8*curX,8*(curY+0.25));
+        output.refreshPacman(8*curX,8*curY,8*curX,8*(curY+0.25));
         curY+=0.25;
         trouble = false;
       } else
@@ -58,25 +62,25 @@ void Game::update(TSPoint p){
     switch (prevDir){
     case Direction::LEFT:
       if (pacmanMap[char(curX-0.25)][char(curY)]!=1 && pacmanMap[char(curX-0.25)][char(curY+0.875)]!=1){
-        output.refreshText(8*curX,8*curY,8*(curX-0.25),8*curY);
+        output.refreshPacman(8*curX,8*curY,8*(curX-0.25),8*curY);
         curX-=0.25;
       }
       break;
     case Direction::RIGHT:
       if (pacmanMap[char(curX+1)][char(curY)]!=1 && pacmanMap[char(curX+1)][char(curY+0.875)]!=1){
-        output.refreshText(8*curX,8*curY,8*(curX+0.25),8*curY);
+        output.refreshPacman(8*curX,8*curY,8*(curX+0.25),8*curY);
         curX+=0.25;
       } 
       break;
     case Direction::TOP:
       if (pacmanMap[char(curX)][char(curY-0.25)]!=1 && pacmanMap[char(curX+0.875)][char(curY-0.25)]!=1){
-        output.refreshText(8*curX,8*curY,8*curX,8*(curY-0.25));
+        output.refreshPacman(8*curX,8*curY,8*curX,8*(curY-0.25));
         curY-=0.25;
       } 
       break;
     case Direction::DOWN:
-      if (pacmanMap[char(curX)][char(curY+1.25)]!=1 && pacmanMap[char(curX+0.875)][char(curY+1.25)]!=1){
-        output.refreshText(8*curX,8*curY,8*curX,8*(curY+0.25));
+      if (pacmanMap[char(curX)][char(curY+1.125)]!=1 && pacmanMap[char(curX+0.875)][char(curY+1.125)]!=1){
+        output.refreshPacman(8*curX,8*curY,8*curX,8*(curY+0.25));
         curY+=0.25;
       }
       break;
