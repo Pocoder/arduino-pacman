@@ -25,7 +25,6 @@ void setup(void) {
   uint16_t ID = tft.readID();
   tft.begin(ID);
   GManager.load();
-  //delay(1000);
 }
 
 void loop(void) {

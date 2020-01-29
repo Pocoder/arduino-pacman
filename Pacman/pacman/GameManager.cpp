@@ -91,7 +91,6 @@ void GameManager::dealRecordsButtons(TSPoint p){
 void GameManager::startGame(){
   curState=State::IN_GAME;
   game.start();
-  output.loadGame();
 }
 void GameManager::dealGameButtons(TSPoint p){
   if (game.isGameOver()){

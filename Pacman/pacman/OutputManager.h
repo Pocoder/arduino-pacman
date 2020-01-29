@@ -30,6 +30,8 @@ public:
   void loadRecords(Records* recs);
   void loadGame();
   void loadGameOver();
+  void refreshText(int oldX,int oldY, int newX,int newY);
+  
 private:
   MCUFRIEND_kbv* tft;
 };

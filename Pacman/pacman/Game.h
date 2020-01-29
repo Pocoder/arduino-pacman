@@ -1,5 +1,7 @@
 #include <TouchScreen.h>
 #include "OutputManager.h"
+#include "Units.h"
+#include "Textures.cpp"
 
 class Game{
 public:
@@ -8,14 +10,15 @@ public:
   bool isGameOver(){
     return gameOver;
   }
-  void update(TSPoint p){
-    delay(100000);
-    gameOver = true;
-  }
-  void start(){
-    gameOver = false;
-  }
+  void update(TSPoint p);
+  void start();
+  void startNewLevel();
 private:
+  Direction curDir = Direction::RIGHT;
+  double curX = 14;
+  double curY = 27;
+  int points = 0;
+  int lives = 3;
   bool gameOver = false;
   OutputManager& output;
 };

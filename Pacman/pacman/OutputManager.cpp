@@ -214,8 +214,6 @@ void OutputManager::loadGame(){
       int x = 8*i+3;
       int y = 8*j+3;
       if (pacmanMap[i][j]==2){
-        Serial.println(i);
-        Serial.println(j);
         
         (*tft).fillRect(x, y,2,2, WHITE);
         (*tft).fillRect(238-x, y,2,2, WHITE);
@@ -226,6 +224,14 @@ void OutputManager::loadGame(){
       }
     }
   }
+
+  //pacman
+  (*tft).drawBitmap(8*14-4, 8*27-4, pacman3,16,16, YELLOW);
+}
+
+void OutputManager::refreshText(int oldX,int oldY, int newX,int newY){
+  (*tft).drawBitmap(oldX-4, oldY-4, pacman3,16,16, BLACK);
+  (*tft).drawBitmap(newX-4, newY-4, pacman3,16,16, YELLOW);
 }
 
 void OutputManager::loadGameOver(){
