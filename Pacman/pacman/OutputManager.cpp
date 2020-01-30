@@ -231,7 +231,7 @@ void OutputManager::loadGame(){
   (*tft).setCursor(10, 290);
   (*tft).setTextSize(2);
   (*tft).setTextColor(YELLOW);
-  (*tft).print("Points");
+  (*tft).print("SCORE");
 
   (*tft).setCursor(90, 290);
   (*tft).print("0");

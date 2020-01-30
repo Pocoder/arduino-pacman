@@ -1,10 +1,6 @@
 #include "Game.h"
 
 void Game::update(TSPoint p){
-  if (pacmanMap[char(curX-0.25)][char(curY)]==2){
-    points+=10;
-    output.refreshPoints(points);
-  }
   if (p.x>0 && p.x<120 && p.y<240 &&p.y>80){
     curDir = Direction::LEFT;
   }
@@ -87,17 +83,17 @@ void Game::update(TSPoint p){
     } 
   } else
     prevDir = curDir;
-  delay(50); //speed
+  delay(30); //speed
 }
 
 
 void Game::start(){
-  curX =14;
+  curX = 14;
   curY = 27;
   points = 0;
   lives = 3;
-  gameOver = false;
   output.loadGame();
+  gameOver = false;
 }
 
 void Game::startNewLevel(){
