@@ -39,9 +39,7 @@ private:
 
   OutputManager& output;
   InputManager& input;
-
-  Records recs;
-
+  
   Game game;
   MyString name;
   State curState;

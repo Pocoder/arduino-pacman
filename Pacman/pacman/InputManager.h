@@ -6,8 +6,6 @@
 #define MINPRESSURE 200
 #define MAXPRESSURE 1000
 
-
-
 class InputManager {
 public:
   InputManager(MCUFRIEND_kbv* p, TouchScreen* tscreen);

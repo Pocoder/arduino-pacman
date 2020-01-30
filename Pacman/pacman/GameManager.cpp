@@ -79,7 +79,6 @@ void GameManager::dealSettingsButtons(TSPoint p) {
 //records
 void GameManager::openRecords(){
   curState = State::RECORDS;
-  output.loadRecords(&recs);
 }
 void GameManager::dealRecordsButtons(TSPoint p){
   if (p.x >= 97 && p.x<=145 && p.y>= 260 && p.y<=275){

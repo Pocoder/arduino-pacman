@@ -12,11 +12,6 @@
 #define YELLOW  0x001F
 #define WHITE   0x0000
 
-struct Records{
-  MyString recNames[6];
-  int recResults[6];
-  int count = 0;
-};
 
 class OutputManager {
 public:
@@ -27,7 +22,7 @@ public:
   void writeName(MyString& name); //showing name
   void loadMenu();
   void loadSettings();
-  void loadRecords(Records* recs);
+  void loadRecords();
   void loadGame();
   void loadGameOver();
   void refreshPacman(int oldX,int oldY, int newX,int newY);

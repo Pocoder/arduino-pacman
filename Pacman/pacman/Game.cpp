@@ -1,5 +1,11 @@
 #include "Game.h"
 
+bool isBorder(char x, char y){
+  int num = 5*x + y/8;
+  int8_t mask = 1<<(7-y%8);
+  return bordersMap[num] & mask;
+}
+
 void Game::update(TSPoint p){
   if (p.x>0 && p.x<120 && p.y<240 &&p.y>80){
     curDir = Direction::LEFT;

@@ -122,24 +122,24 @@ void OutputManager::loadSettings() {
 }
 
 //load Records
-void OutputManager::loadRecords(Records* recs){
+void OutputManager::loadRecords(){
   (*tft).fillScreen(BLACK);
   (*tft).setCursor(121 - 7*9, 55);
   (*tft).setTextSize(3);
   (*tft).setTextColor(YELLOW);
   (*tft).print("RECORDS");
   (*tft).setTextSize(2);
-  for (int i = 0;i<(*recs).count;i++){
-    (*tft).setCursor(5, 90+20*i);
-    (*tft).print((*recs).recNames[i].str());
-    (*tft).setCursor(120, 90+20*i);
-    (*tft).print((*recs).recResults[i]);
-  }
   (*tft).setCursor(121 - 2*6*2 , 260);
   (*tft).print("MENU");
 }
 
 //Game
+bool isPoint(int8_t x, int8_t y){
+  int8_t num = 5*x + y/8;
+  int8_t mask = 1<<(7-y%8);
+  return pointsMap[num] & mask;
+}
+
 void OutputManager::loadGame(){
   (*tft).fillScreen(BLACK);
   //ramka
@@ -209,19 +209,25 @@ void OutputManager::loadGame(){
   (*tft).drawRoundRect(69, 229, 5, 29,radius, BLUE);
   (*tft).drawRoundRect(165, 229, 5, 29,radius, BLUE);
 
-  for (int j = 0;j<40;j++){
-    for (int i = 0;i<15;i++){
+  (*tft).fillRect(19, 43,2,2, WHITE);
+  
+  
+  for (int8_t j = 0;j<40;j++){
+    for (int8_t i = 0;i<15;i++){
       int x = 8*i+3;
       int y = 8*j+3;
-      if (pacmanMap[i][j]==2){
-        
+      if (isPoint(i,j)){
+        Serial.print(i);
+        Serial.print(' ');
+        Serial.print(j);
+        Serial.print('\n');
         (*tft).fillRect(x, y,2,2, WHITE);
         (*tft).fillRect(238-x, y,2,2, WHITE);
-      } else
+      }/* else
       if (pacmanMap[i][j]==3){
         (*tft).fillCircle(19, y, 2, WHITE);
         (*tft).fillCircle(219, y, 2, WHITE);
-      }
+      }*/
     }
   }
 
