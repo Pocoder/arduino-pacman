@@ -25,7 +25,7 @@ private:
   bool trouble = false;
   Direction curDir = Direction::RIGHT;
   Direction prevDir = Direction::RIGHT;
-  double curX = 14;
+  double curX = 14.5;
   double curY = 27;
   int points = 0;
   uint8_t lives = 3;

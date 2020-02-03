@@ -18,6 +18,8 @@ class OutputManager {
 public:
   OutputManager(MCUFRIEND_kbv* p);
 
+  void oprint(int x, int y, char* text);
+  void rect(int x,int y, int width,int height);
   void load(); //loading screen
   void enterName(MyString& name); //back of entering name
   void writeName(MyString& name); //showing name

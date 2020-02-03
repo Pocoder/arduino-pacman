@@ -107,42 +107,42 @@ void Game::update(TSPoint p){
   if (uint8_t(curX) == 2 && uint8_t(curY) == 7 && BPoint1){
     BPoint1 = false;
     dots--;
-    points+= 100;
+    points+= 50;
     output.refreshPoints(points); 
   }
   if (uint8_t(curX) == 27 && uint8_t(curY) == 7 && BPoint2){
     BPoint2 = false;
     dots--;
-    points+= 100;
+    points+= 50;
     output.refreshPoints(points); 
   }
   if (uint8_t(curX) == 2 && uint8_t(curY) == 27 && BPoint3){
     BPoint3 = false;
     dots--;
-    points+= 100;
+    points+= 50;
     output.refreshPoints(points); 
   }
   if (uint8_t(curX) == 27 && uint8_t(curY) == 27 && BPoint4){
     BPoint4 = false;
     dots--;
-    points+= 100;
+    points+= 50;
     output.refreshPoints(points); 
   }
   //POINTS
   if (isPoint(uint8_t(curX),uint8_t(curY))){
     curPointsMap[5*uint8_t(curX) + uint8_t(curY)/8] &= ~(1<<(7-uint8_t(curY)%8));
     dots--;
-    points+=25;
+    points+=10;
     output.refreshPoints(points);
   }
 
   if (dots == 0){
-    output.refreshPacman(curX*8,curY*8,14*8,27*8, curTexture, curDir);
+    output.refreshPacman(curX*8,curY*8,14*8+4,27*8, curTexture, curDir);
     startNewLevel();
   }
   
   ++curTexture %= 4;
-  delay(50); //speed
+  delay(3); //fps
 }
 
 
@@ -164,7 +164,19 @@ void Game::startNewLevel(){
     curPointsMap[i] = pointsMap[i];
   }
   dots = 244;
-  curX = 14;
+  curX = 14.5;
   curY = 27;
   output.loadStats(points, lives);
+  output.oprint(117,167, "3");
+  delay(1000);
+  output.rect(80,163,80,10);
+  output.oprint(117,167, "2");
+  delay(1000);
+  output.rect(80,163,80,10);
+  output.oprint(117,167, "1");
+  delay(1000);
+  output.rect(80,163,80,10);
+  output.oprint(114,167, "GO");
+  delay(100);
+  output.rect(80,163,80,14);
 }

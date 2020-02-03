@@ -5,7 +5,15 @@ OutputManager::OutputManager(MCUFRIEND_kbv* p) {
   tft = p;
 }
 
-
+void OutputManager::oprint(int x, int y, char* text){
+  (*tft).setCursor(x, y);
+  (*tft).setTextSize(1);
+  (*tft).setTextColor(YELLOW);
+  (*tft).println(text);
+}
+void OutputManager::rect(int x, int y, int width, int height){
+  (*tft).fillRect(x, y, width, height ,BLACK);
+}
 //loading
 void OutputManager::load() {
   (*tft).fillScreen(BLACK);
@@ -156,7 +164,7 @@ void OutputManager::loadGame(){
   (*tft).drawRoundRect(8, 229, 21, 5,radius, BLUE); // левый нижний
   (*tft).drawRoundRect(189, 109, 42, 29,radius, BLUE); // првый вехрний
   (*tft).drawRoundRect(189, 157, 42, 29,radius, BLUE); // правый центральный
-  (*tft).drawRoundRect(210, 229, 21, 5,radius, BLUE); // правый нижний
+  (*tft).drawRoundRect(211, 229, 21, 5,radius, BLUE); // правый нижний
   (*tft).fillRect(8, 139, 6,17 ,BLACK);
   (*tft).fillRect(225, 139, 7, 17,BLACK);
   
@@ -224,7 +232,7 @@ void OutputManager::loadStats(int points, int8_t lives){
   (*tft).fillCircle(220, 219, 2, WHITE);
 
   //pacman
-  (*tft).drawBitmap(8*14-4, 8*27-4, pacman1R,16,16, YELLOW);
+  (*tft).drawBitmap(8*14, 8*27-4, pacman1R,16,16, YELLOW);
 
   (*tft).setCursor(10, 290);
   (*tft).setTextSize(2);

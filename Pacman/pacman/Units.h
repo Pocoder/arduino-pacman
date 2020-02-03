@@ -12,20 +12,19 @@ struct Point {
   int y;
 };
 
-class Unit {
+class Enemy {
 public:
-  //конструктор, принимающий начальное положение юнита
-  Unit(Point position_,int speed_):speed(speed_),position(position_){}
-
-protected:
+  void calculateDirection();
+  void start(uint8_t dots);
+  bool isStarted();
+  Point getPosition(){
+    return position;
+  }
+private:
+  int color;
+  bool started = false; 
+  long long int startDots;
   int speed;
   Point position;
   Direction curDir;
-};
-
-class Enemy : public Unit {
-public:
-  void calculateDirection();
-private:
-
 };
