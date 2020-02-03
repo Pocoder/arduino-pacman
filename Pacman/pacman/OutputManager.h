@@ -1,6 +1,7 @@
 #pragma once
 #include "Adafruit_GFX.h"
 #include <MCUFRIEND_kbv.h>
+#include "Units.h"
 #include "MyString.h"
 
 #define BLACK   0xFFFF
@@ -26,7 +27,7 @@ public:
   void loadGame();
   void loadStats(int points, int8_t lives);
   void loadGameOver();
-  void refreshPacman(int oldX,int oldY, int newX,int newY);
+  void refreshPacman(int oldX,int oldY, int newX,int newY, int8_t curTexture, Direction curDir);
   void refreshPoints(int value);
 private:
   MCUFRIEND_kbv* tft;

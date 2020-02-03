@@ -21,7 +21,7 @@ private:
     uint8_t mask = 1<<(7-y%8);
     return curPointsMap[num] & mask;
   }
-  
+  int8_t curTexture = 0;
   bool trouble = false;
   Direction curDir = Direction::RIGHT;
   Direction prevDir = Direction::RIGHT;

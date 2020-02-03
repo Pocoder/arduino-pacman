@@ -13,10 +13,10 @@ void OutputManager::load() {
   (*tft).setTextColor(YELLOW);
   (*tft).setTextSize(4);
   (*tft).println("PACMAN");
-  (*tft).drawBitmap(60 , 200, pacman1,16,16, YELLOW);
+  (*tft).drawBitmap(60 , 200, pacman1R,16,16, YELLOW);
   for (int i = 0; i < 120; i++) {
-    (*tft).drawBitmap(60+i , 200, pacman1,16,16, BLACK);
-    (*tft).drawBitmap(61 + i, 200, pacman1,16,16, YELLOW);
+    (*tft).drawBitmap(60+i , 200, pacman1R,16,16, BLACK);
+    (*tft).drawBitmap(61 + i, 200, pacman1R,16,16, YELLOW);
     
     delay(5);
   }
@@ -25,9 +25,6 @@ void OutputManager::load() {
 //entering name
 void OutputManager::enterName(MyString& name) {
   (*tft).fillScreen(BLACK);
-  (*tft).drawBitmap(0,0, pacman1, 16,16,YELLOW);
-  (*tft).drawBitmap(32,0, pacman2, 16,16,YELLOW);
-  (*tft).drawBitmap(65,0, pacman3, 16,16,YELLOW);
   (*tft).setCursor(83, 70);
   (*tft).setTextColor(YELLOW);
   (*tft).setTextSize(3);
@@ -227,7 +224,7 @@ void OutputManager::loadStats(int points, int8_t lives){
   (*tft).fillCircle(220, 219, 2, WHITE);
 
   //pacman
-  (*tft).drawBitmap(8*14-4, 8*27-4, pacman3,16,16, YELLOW);
+  (*tft).drawBitmap(8*14-4, 8*27-4, pacman1R,16,16, YELLOW);
 
   (*tft).setCursor(10, 290);
   (*tft).setTextSize(2);
@@ -239,16 +236,79 @@ void OutputManager::loadStats(int points, int8_t lives){
 
   (*tft).fillRect(180, 290, 59, 20 ,BLACK);
   if (lives>=1)
-    (*tft).drawBitmap(180,290 , pacman1,16,16, YELLOW);
+    (*tft).drawBitmap(180,290 , pacman1R,16,16, YELLOW);
   if (lives>=2)
-    (*tft).drawBitmap(200,290 , pacman1,16,16, YELLOW);
+    (*tft).drawBitmap(200,290 , pacman1R,16,16, YELLOW);
   if (lives>=3)  
-    (*tft).drawBitmap(220,290 , pacman1,16,16, YELLOW);
+    (*tft).drawBitmap(220,290 , pacman1R,16,16, YELLOW);
 }
 
-void OutputManager::refreshPacman(int oldX,int oldY, int newX,int newY){
+void OutputManager::refreshPacman(int oldX,int oldY, int newX,int newY, int8_t curTexture, Direction curDir){
   (*tft).drawBitmap(oldX-4, oldY-4, pacman3,16,16, BLACK);
-  (*tft).drawBitmap(newX-4, newY-4, pacman3,16,16, YELLOW);
+  if (curTexture == 0){
+    switch (curDir){
+      case Direction::RIGHT:
+        (*tft).drawBitmap(newX-4, newY-4, pacman2R,16,16, YELLOW);
+        break;
+      case Direction::LEFT:
+        (*tft).drawBitmap(newX-4, newY-4, pacman2L,16,16, YELLOW);
+        break;
+      case Direction::TOP:
+        (*tft).drawBitmap(newX-4, newY-4, pacman2T,16,16, YELLOW);
+        break;
+      case Direction::DOWN:
+        (*tft).drawBitmap(newX-4, newY-4, pacman2D,16,16, YELLOW);
+        break;
+    }
+  }
+  if (curTexture == 1){
+    switch (curDir){
+      case Direction::RIGHT:
+        (*tft).drawBitmap(newX-4, newY-4, pacman3,16,16, YELLOW);
+        break;
+      case Direction::LEFT:
+        (*tft).drawBitmap(newX-4, newY-4, pacman3,16,16, YELLOW);
+        break;
+      case Direction::TOP:
+        (*tft).drawBitmap(newX-4, newY-4, pacman3,16,16, YELLOW);
+        break;
+      case Direction::DOWN:
+        (*tft).drawBitmap(newX-4, newY-4, pacman3,16,16, YELLOW);
+        break;
+    }
+  }
+  if (curTexture == 2){
+    switch (curDir){
+      case Direction::RIGHT:
+        (*tft).drawBitmap(newX-4, newY-4, pacman2R,16,16, YELLOW);
+        break;
+      case Direction::LEFT:
+        (*tft).drawBitmap(newX-4, newY-4, pacman2L,16,16, YELLOW);
+        break;
+      case Direction::TOP:
+        (*tft).drawBitmap(newX-4, newY-4, pacman2T,16,16, YELLOW);
+        break;
+      case Direction::DOWN:
+        (*tft).drawBitmap(newX-4, newY-4, pacman2D,16,16, YELLOW);
+        break;
+    }
+  }
+  if (curTexture == 3){
+    switch (curDir){
+      case Direction::RIGHT:
+        (*tft).drawBitmap(newX-4, newY-4, pacman1R,16,16, YELLOW);
+        break;
+      case Direction::LEFT:
+        (*tft).drawBitmap(newX-4, newY-4, pacman1L,16,16, YELLOW);
+        break;
+      case Direction::TOP:
+        (*tft).drawBitmap(newX-4, newY-4, pacman1T,16,16, YELLOW);
+        break;
+      case Direction::DOWN:
+        (*tft).drawBitmap(newX-4, newY-4, pacman1D,16,16, YELLOW);
+        break;
+    }
+  }
 }
 
 void OutputManager::refreshPoints(int value){

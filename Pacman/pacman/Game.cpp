@@ -1,6 +1,10 @@
 #include "Game.h"
 
 bool isBorder(char x, char y){
+  if (x<=0 && y==18)
+    return false;
+  if ((x<=0 || x>=28) && y!=18)
+    return true;
   int num = 5*x + y/8;
   int8_t mask = 1<<(7-y%8);
   return bordersMap[num] & mask;
@@ -19,16 +23,17 @@ void Game::update(TSPoint p){
   if (p.y>240){
     curDir = Direction::DOWN;
   }
+  
   //teleport
   if (curX > 30.25)
     curX -= 30;
   if (curX < -1.25)
     curX += 30;
-  
+    
   switch (curDir){
     case Direction::LEFT:
       if (!isBorder(char(curX-0.25),char(curY)) && !isBorder(char(curX-0.25),char(curY+0.875))){
-        output.refreshPacman(8*curX,8*curY,8*(curX-0.25),8*curY);
+        output.refreshPacman(8*curX,8*curY,8*(curX-0.25),8*curY, curTexture, curDir);
         curX-=0.25;
         trouble = false;
       } else
@@ -36,7 +41,7 @@ void Game::update(TSPoint p){
       break;
     case Direction::RIGHT:
       if (!isBorder(char(curX+1), char(curY))&& !isBorder(char(curX+1), char(curY+0.875))){
-        output.refreshPacman(8*curX,8*curY,8*(curX+0.25),8*curY);
+        output.refreshPacman(8*curX,8*curY,8*(curX+0.25),8*curY, curTexture, curDir);
         curX+=0.25;
         trouble = false;
       } else
@@ -44,7 +49,7 @@ void Game::update(TSPoint p){
       break;
     case Direction::TOP:
       if (!isBorder(char(curX),char(curY-0.25)) && !isBorder(char(curX+0.875),char(curY-0.25))){
-        output.refreshPacman(8*curX,8*curY,8*curX,8*(curY-0.25));
+        output.refreshPacman(8*curX,8*curY,8*curX,8*(curY-0.25), curTexture, curDir);
         curY-=0.25;
         trouble = false;
       } else
@@ -52,7 +57,7 @@ void Game::update(TSPoint p){
       break;
     case Direction::DOWN:
       if (!isBorder(char(curX),char(curY+1.125)) && !isBorder(char(curX+0.875),char(curY+1.125))){
-        output.refreshPacman(8*curX,8*curY,8*curX,8*(curY+0.25));
+        output.refreshPacman(8*curX,8*curY,8*curX,8*(curY+0.25), curTexture, curDir);
         curY+=0.25;
         trouble = false;
       } else
@@ -64,7 +69,7 @@ void Game::update(TSPoint p){
     switch (prevDir){
       case Direction::LEFT:
         if (!isBorder(char(curX-0.25),char(curY)) && !isBorder(char(curX-0.25),char(curY+0.875))){
-          output.refreshPacman(8*curX,8*curY,8*(curX-0.25),8*curY);
+          output.refreshPacman(8*curX,8*curY,8*(curX-0.25),8*curY, curTexture, prevDir);
           curX-=0.25;
           trouble = false;
         } else
@@ -72,7 +77,7 @@ void Game::update(TSPoint p){
         break;
       case Direction::RIGHT:
         if (!isBorder(char(curX+1), char(curY))&& !isBorder(char(curX+1), char(curY+0.875))){
-          output.refreshPacman(8*curX,8*curY,8*(curX+0.25),8*curY);
+          output.refreshPacman(8*curX,8*curY,8*(curX+0.25),8*curY, curTexture, prevDir);
           curX+=0.25;
           trouble = false;
         } else
@@ -80,7 +85,7 @@ void Game::update(TSPoint p){
         break;
       case Direction::TOP:
         if (!isBorder(char(curX),char(curY-0.25)) && !isBorder(char(curX+0.875),char(curY-0.25))){
-          output.refreshPacman(8*curX,8*curY,8*curX,8*(curY-0.25));
+          output.refreshPacman(8*curX,8*curY,8*curX,8*(curY-0.25), curTexture, prevDir);
           curY-=0.25;
           trouble = false;
         } else
@@ -88,7 +93,7 @@ void Game::update(TSPoint p){
         break;
       case Direction::DOWN:
         if (!isBorder(char(curX),char(curY+1.125)) && !isBorder(char(curX+0.875),char(curY+1.125))){
-          output.refreshPacman(8*curX,8*curY,8*curX,8*(curY+0.25));
+          output.refreshPacman(8*curX,8*curY,8*curX,8*(curY+0.25), curTexture, prevDir);
           curY+=0.25;
           trouble = false;
         } else
@@ -132,10 +137,12 @@ void Game::update(TSPoint p){
   }
 
   if (dots == 0){
-    output.refreshPacman(curX*8,curY*8,14*8,27*8);
+    output.refreshPacman(curX*8,curY*8,14*8,27*8, curTexture, curDir);
     startNewLevel();
   }
-  delay(3); //speed
+  
+  ++curTexture %= 4;
+  delay(50); //speed
 }
 
 
@@ -149,6 +156,10 @@ void Game::start(){
 
 void Game::startNewLevel(){
   curDir = Direction::RIGHT;
+  BPoint1 = true;
+  BPoint2 = true;
+  BPoint3 = true;
+  BPoint4 = true;
   for (int i = 0;i<150;i++){
     curPointsMap[i] = pointsMap[i];
   }
