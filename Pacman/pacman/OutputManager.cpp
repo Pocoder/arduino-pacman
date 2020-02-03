@@ -17,16 +17,44 @@ void OutputManager::rect(int x, int y, int width, int height){
 //loading
 void OutputManager::load() {
   (*tft).fillScreen(BLACK);
-  (*tft).setCursor(53, 100);
+  (*tft).setCursor(77, 85);
   (*tft).setTextColor(YELLOW);
   (*tft).setTextSize(4);
-  (*tft).println("PACMAN");
-  (*tft).drawBitmap(60 , 200, pacman1R,16,16, YELLOW);
-  for (int i = 0; i < 120; i++) {
-    (*tft).drawBitmap(60+i , 200, pacman1R,16,16, BLACK);
-    (*tft).drawBitmap(61 + i, 200, pacman1R,16,16, YELLOW);
-    
-    delay(5);
+  (*tft).println("GAME");
+  (*tft).setCursor(112, 114);
+  (*tft).setTextColor(YELLOW);
+  (*tft).setTextSize(2);
+  (*tft).println("by");
+  (*tft).setCursor(4, 132);
+  (*tft).setTextColor(YELLOW);
+  (*tft).setTextSize(3);
+  (*tft).println("Denis Makarov");
+  
+  (*tft).setTextSize(2);
+  (*tft).setTextColor(RED);
+  (*tft).setCursor(70, 237);
+  (*tft).println("P");
+  (*tft).setTextColor(0xFCE0);
+  (*tft).setCursor(90, 237);
+  (*tft).println("A");
+  (*tft).setTextColor(YELLOW);
+  (*tft).setCursor(110, 237);
+  (*tft).println("C");
+  (*tft).setTextColor(GREEN);
+  (*tft).setCursor(130, 237);
+  (*tft).println("M");
+  (*tft).setTextColor(BLUE);
+  (*tft).setCursor(150, 237);
+  (*tft).println("A");
+  (*tft).setTextColor(MAGENTA);
+  (*tft).setCursor(170, 237);
+  (*tft).println("N");
+  int curTexture = 0;
+  Direction curDir = Direction::RIGHT;
+  for (int i = 0; i < 160; i+=4) {
+    refreshPacman(34+i,240,38+i,240, curTexture,curDir);
+    ++curTexture %= 4;
+    delay(80);
   }
 }
 
