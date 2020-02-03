@@ -209,9 +209,8 @@ void OutputManager::loadGame(){
   (*tft).drawRoundRect(69, 229, 5, 29,radius, BLUE);
   (*tft).drawRoundRect(165, 229, 5, 29,radius, BLUE);
 
-  (*tft).fillRect(19, 43,2,2, WHITE);
   
-  
+  Serial.print(isPoint(1,6));
   for (int8_t j = 0;j<40;j++){
     for (int8_t i = 0;i<15;i++){
       int x = 8*i+3;
