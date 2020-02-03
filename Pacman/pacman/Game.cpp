@@ -97,21 +97,63 @@ void Game::update(TSPoint p){
     } 
   }else
     prevDir = curDir;
-  delay(30); //speed
+
+  //SUPERPOINTS
+  if (uint8_t(curX) == 2 && uint8_t(curY) == 7 && BPoint1){
+    BPoint1 = false;
+    dots--;
+    points+= 100;
+    output.refreshPoints(points); 
+  }
+  if (uint8_t(curX) == 27 && uint8_t(curY) == 7 && BPoint2){
+    BPoint2 = false;
+    dots--;
+    points+= 100;
+    output.refreshPoints(points); 
+  }
+  if (uint8_t(curX) == 2 && uint8_t(curY) == 27 && BPoint3){
+    BPoint3 = false;
+    dots--;
+    points+= 100;
+    output.refreshPoints(points); 
+  }
+  if (uint8_t(curX) == 27 && uint8_t(curY) == 27 && BPoint4){
+    BPoint4 = false;
+    dots--;
+    points+= 100;
+    output.refreshPoints(points); 
+  }
+  //POINTS
+  if (isPoint(uint8_t(curX),uint8_t(curY))){
+    curPointsMap[5*uint8_t(curX) + uint8_t(curY)/8] &= ~(1<<(7-uint8_t(curY)%8));
+    dots--;
+    points+=25;
+    output.refreshPoints(points);
+  }
+
+  if (dots == 0){
+    output.refreshPacman(curX*8,curY*8,14*8,27*8);
+    startNewLevel();
+  }
+  delay(3); //speed
 }
 
 
 void Game::start(){
-  curX = 14;
-  curY = 27;
+  output.loadGame();
   points = 0;
   lives = 3;
-  output.loadGame();
+  startNewLevel();
   gameOver = false;
 }
 
 void Game::startNewLevel(){
+  curDir = Direction::RIGHT;
+  for (int i = 0;i<150;i++){
+    curPointsMap[i] = pointsMap[i];
+  }
+  dots = 244;
   curX = 14;
   curY = 27;
-  output.loadGame();
+  output.loadStats(points, lives);
 }

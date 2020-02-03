@@ -24,10 +24,10 @@ public:
   void loadSettings();
   void loadRecords();
   void loadGame();
+  void loadStats(int points, int8_t lives);
   void loadGameOver();
   void refreshPacman(int oldX,int oldY, int newX,int newY);
   void refreshPoints(int value);
-  void refreshLives(int value);
 private:
   MCUFRIEND_kbv* tft;
 };

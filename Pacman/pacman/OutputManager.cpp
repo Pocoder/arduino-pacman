@@ -208,27 +208,23 @@ void OutputManager::loadGame(){
   (*tft).drawRoundRect(117, 229, 5, 29,radius, BLUE);
   (*tft).drawRoundRect(69, 229, 5, 29,radius, BLUE);
   (*tft).drawRoundRect(165, 229, 5, 29,radius, BLUE);
+}
 
-  
-  Serial.print(isPoint(1,6));
+void OutputManager::loadStats(int points, int8_t lives){
   for (int8_t j = 0;j<40;j++){
     for (int8_t i = 0;i<15;i++){
       int x = 8*i+3;
       int y = 8*j+3;
       if (isPoint(i,j)){
-        Serial.print(i);
-        Serial.print(' ');
-        Serial.print(j);
-        Serial.print('\n');
         (*tft).fillRect(x, y,2,2, WHITE);
         (*tft).fillRect(238-x, y,2,2, WHITE);
-      }/* else
-      if (pacmanMap[i][j]==3){
-        (*tft).fillCircle(19, y, 2, WHITE);
-        (*tft).fillCircle(219, y, 2, WHITE);
-      }*/
+      }
     }
   }
+  (*tft).fillCircle(19, 59, 2, WHITE);
+  (*tft).fillCircle(220, 59, 2, WHITE);
+  (*tft).fillCircle(19, 219, 2, WHITE);
+  (*tft).fillCircle(220, 219, 2, WHITE);
 
   //pacman
   (*tft).drawBitmap(8*14-4, 8*27-4, pacman3,16,16, YELLOW);
@@ -239,11 +235,15 @@ void OutputManager::loadGame(){
   (*tft).print("SCORE");
 
   (*tft).setCursor(90, 290);
-  (*tft).print("0");
+  (*tft).print(points);
 
-  (*tft).drawBitmap(180,290 , pacman1,16,16, YELLOW);
-  (*tft).drawBitmap(200,290 , pacman1,16,16, YELLOW);
-  (*tft).drawBitmap(220,290 , pacman1,16,16, YELLOW);
+  (*tft).fillRect(180, 290, 59, 20 ,BLACK);
+  if (lives>=1)
+    (*tft).drawBitmap(180,290 , pacman1,16,16, YELLOW);
+  if (lives>=2)
+    (*tft).drawBitmap(200,290 , pacman1,16,16, YELLOW);
+  if (lives>=3)  
+    (*tft).drawBitmap(220,290 , pacman1,16,16, YELLOW);
 }
 
 void OutputManager::refreshPacman(int oldX,int oldY, int newX,int newY){
@@ -258,14 +258,6 @@ void OutputManager::refreshPoints(int value){
   (*tft).print(value);
 }
 
-void OutputManager::refreshLives(int value){
-  if (value == 2)
-    (*tft).fillRect(220, 290, 16,16 ,BLACK);
-  if (value == 1)
-    (*tft).fillRect(200, 290, 16,16 ,BLACK);
-  if (value == 0)
-    (*tft).fillRect(180, 290, 16,16 ,BLACK);
-}
 
 void OutputManager::loadGameOver(){
   (*tft).fillScreen(BLACK);
