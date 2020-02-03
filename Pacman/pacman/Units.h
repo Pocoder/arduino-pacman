@@ -8,8 +8,8 @@ enum class Direction {
 };
 
 struct Point {
-  int x;
-  int y;
+  double x;
+  double y;
 };
 
 class Enemy {
@@ -21,10 +21,12 @@ public:
     return position;
   }
 private:
+  int homePoint;
+  int targetPoint;
   int color;
   bool started = false; 
   long long int startDots;
-  int speed;
+  double speed;
   Point position;
   Direction curDir;
 };

@@ -142,7 +142,7 @@ void Game::update(TSPoint p){
   }
   
   ++curTexture %= 4;
-  delay(3); //fps
+  delay(50); //fps
 }
 
 

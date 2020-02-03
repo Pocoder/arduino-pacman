@@ -22,11 +22,9 @@ void OutputManager::load() {
   (*tft).setTextSize(4);
   (*tft).println("GAME");
   (*tft).setCursor(112, 114);
-  (*tft).setTextColor(YELLOW);
   (*tft).setTextSize(2);
   (*tft).println("by");
   (*tft).setCursor(4, 132);
-  (*tft).setTextColor(YELLOW);
   (*tft).setTextSize(3);
   (*tft).println("Denis Makarov");
   
