@@ -11,5 +11,8 @@ public:
 
 private:
   GhostsState curState = GhostsState::Scatter;
-  
+  Blinky blinky;
+  Pinky pinky;
+  Inky inky;
+  Clyde clyde;
 }
