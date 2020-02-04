@@ -1,3 +1,4 @@
+#pragma once
 #include <avr/pgmspace.h>
 
 const uint8_t ghostEyes[]PROGMEM = {

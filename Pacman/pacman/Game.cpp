@@ -29,10 +29,13 @@ void Game::update(TSPoint p){
     curX -= 30;
   if (curX < -1.25)
     curX += 30;
-    
+
+  //GHOSTS
+  EManager.update(curX, curY, curDir, curPointsMap, dots);
+  
   switch (curDir){
     case Direction::LEFT:
-      if (!isBorder(char(curX-0.25),char(curY)) && !isBorder(char(curX-0.25),char(curY+0.875))){
+      if (!isBorder(char(curX-0.125),char(curY)) && !isBorder(char(curX-0.125),char(curY+0.875))){
         output.refreshPacman(8*curX,8*curY,8*(curX-0.25),8*curY, curTexture, curDir);
         curX-=0.25;
         trouble = false;
@@ -48,7 +51,7 @@ void Game::update(TSPoint p){
         trouble = true;
       break;
     case Direction::TOP:
-      if (!isBorder(char(curX),char(curY-0.25)) && !isBorder(char(curX+0.875),char(curY-0.25))){
+      if (!isBorder(char(curX),char(curY-0.125)) && !isBorder(char(curX+0.875),char(curY-0.125))){
         output.refreshPacman(8*curX,8*curY,8*curX,8*(curY-0.25), curTexture, curDir);
         curY-=0.25;
         trouble = false;
@@ -68,7 +71,7 @@ void Game::update(TSPoint p){
   if (trouble){
     switch (prevDir){
       case Direction::LEFT:
-        if (!isBorder(char(curX-0.25),char(curY)) && !isBorder(char(curX-0.25),char(curY+0.875))){
+        if (!isBorder(char(curX-0.125),char(curY)) && !isBorder(char(curX-0.125),char(curY+0.875))){
           output.refreshPacman(8*curX,8*curY,8*(curX-0.25),8*curY, curTexture, prevDir);
           curX-=0.25;
           trouble = false;
@@ -84,7 +87,7 @@ void Game::update(TSPoint p){
           trouble = true;
         break;
       case Direction::TOP:
-        if (!isBorder(char(curX),char(curY-0.25)) && !isBorder(char(curX+0.875),char(curY-0.25))){
+        if (!isBorder(char(curX),char(curY-0.125)) && !isBorder(char(curX+0.875),char(curY-0.125))){
           output.refreshPacman(8*curX,8*curY,8*curX,8*(curY-0.25), curTexture, prevDir);
           curY-=0.25;
           trouble = false;
@@ -142,9 +145,8 @@ void Game::update(TSPoint p){
   }
   
   ++curTexture %= 4;
-  delay(50); //fps
+  delay(30); //fps
 }
-
 
 void Game::start(){
   output.loadGame();
@@ -154,7 +156,36 @@ void Game::start(){
   gameOver = false;
 }
 
+void Game::death(){
+  lives--;
+  if (lives == 0)
+    gameOver = true;
+  else{
+    curTexture = 0;
+    output.refreshPacman(curX*8,curY*8,14*8+4,27*8, curTexture, curDir);
+    curDir = Direction::RIGHT;
+    curX = 14.5;
+    curY = 27;
+    output.loadStats(points, lives);
+    EManager.startNewLevel();
+    
+    output.oprint(117,167, "3");
+    delay(1000);
+    output.rect(80,163,80,10);
+    output.oprint(117,167, "2");
+    delay(1000);
+    output.rect(80,163,80,10);
+    output.oprint(117,167, "1");
+    delay(1000);
+    output.rect(80,163,80,10);
+    output.oprint(114,167, "GO");
+    delay(100);
+    output.rect(80,163,80,14);
+  }
+}
+
 void Game::startNewLevel(){
+  curTexture = 3;
   curDir = Direction::RIGHT;
   BPoint1 = true;
   BPoint2 = true;
@@ -167,6 +198,8 @@ void Game::startNewLevel(){
   curX = 14.5;
   curY = 27;
   output.loadStats(points, lives);
+  EManager.startNewLevel();
+  
   output.oprint(117,167, "3");
   delay(1000);
   output.rect(80,163,80,10);

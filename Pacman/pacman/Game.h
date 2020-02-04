@@ -1,11 +1,11 @@
 #include <TouchScreen.h>
 #include "OutputManager.h"
-#include "Units.h"
 #include "Textures.cpp"
+#include "EnemyManager.h"
 
 class Game{
 public:
-  Game(OutputManager& om):output(om){
+  Game(OutputManager& om):output(om), EManager(om){
     curPointsMap = new uint8_t[150];
   }
   bool isGameOver(){
@@ -13,8 +13,10 @@ public:
   }
   void update(TSPoint p);
   void start();
+  void death();
   void startNewLevel();
 private:
+  EnemyManager EManager;
   uint8_t* curPointsMap;
   bool isPoint(uint8_t x, uint8_t y){
     uint8_t num = 5*x + y/8;

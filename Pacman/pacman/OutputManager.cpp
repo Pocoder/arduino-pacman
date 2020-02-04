@@ -17,7 +17,7 @@ void OutputManager::rect(int x, int y, int width, int height){
 //loading
 void OutputManager::load() {
   (*tft).fillScreen(BLACK);
-  (*tft).setCursor(77, 85);
+  /*(*tft).setCursor(77, 85);
   (*tft).setTextColor(YELLOW);
   (*tft).setTextSize(4);
   (*tft).println("GAME");
@@ -26,9 +26,9 @@ void OutputManager::load() {
   (*tft).println("by");
   (*tft).setCursor(4, 132);
   (*tft).setTextSize(3);
-  (*tft).println("Denis Makarov");
+  (*tft).println("Denis Makarov");*/
   
-  (*tft).setTextSize(2);
+  /*(*tft).setTextSize(2);
   (*tft).setTextColor(RED);
   (*tft).setCursor(70, 237);
   (*tft).println("P");
@@ -46,7 +46,7 @@ void OutputManager::load() {
   (*tft).println("A");
   (*tft).setTextColor(MAGENTA);
   (*tft).setCursor(170, 237);
-  (*tft).println("N");
+  (*tft).println("N");*/
   int curTexture = 0;
   Direction curDir = Direction::RIGHT;
   for (int i = 0; i < 160; i+=4) {
@@ -209,15 +209,15 @@ void OutputManager::loadGame(){
   (*tft).drawRoundRect(165, 85, 5, 53,radius, BLUE);
   (*tft).drawRoundRect(141, 109, 26, 5,radius, BLUE); 
      //
-  (*tft).fillRect(70, 110, 6, 3,BLACK);
-  (*tft).fillRect(118, 88, 3, 5,BLACK);
-  (*tft).fillRect(164, 110, 5, 3,BLACK); 
+  //(*tft).fillRect(70, 110, 6, 3,BLACK);
+  //(*tft).fillRect(118, 88, 3, 5,BLACK);
+  //(*tft).fillRect(164, 110, 5, 3,BLACK); 
 
   //prison
-  (*tft).drawRect(93, 133, 21, 3, WHITE);
+  (*tft).drawRect(93, 133, 15, 3, WHITE);
   (*tft).drawRect(93, 133, 3, 26, WHITE);
   (*tft).drawRect(93, 157, 53, 3, WHITE);
-  (*tft).drawRect(125, 133, 21, 3, WHITE);
+  (*tft).drawRect(131, 133, 15, 3, WHITE);
   (*tft).drawRect(144, 133, 3, 26, WHITE);
 
   //bot monogogranniki
@@ -343,6 +343,15 @@ void OutputManager::refreshPacman(int oldX,int oldY, int newX,int newY, int8_t c
         break;
     }
   }
+}
+
+void OutputManager::refreshGhost(int oldX,int oldY, int newX,int newY, int color, bool eyeMode){
+  (*tft).drawBitmap(oldX-4, oldY-4, ghostTexture, 16,16, BLACK);
+  (*tft).drawBitmap(oldX-4, oldY+1, ghostEyes, 16,5, BLACK);
+
+  if (!eyeMode)
+    (*tft).drawBitmap(newX-4, newY-4, ghostTexture,16,16, color);
+  (*tft).drawBitmap(newX-4, newY+1, ghostEyes, 16,5, WHITE);
 }
 
 void OutputManager::refreshPoints(int value){

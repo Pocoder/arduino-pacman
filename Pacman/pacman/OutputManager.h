@@ -1,7 +1,6 @@
 #pragma once
 #include "Adafruit_GFX.h"
 #include <MCUFRIEND_kbv.h>
-#include "Units.h"
 #include "MyString.h"
 
 #define BLACK   0xFFFF
@@ -13,6 +12,12 @@
 #define YELLOW  0x001F
 #define WHITE   0x0000
 
+enum class Direction {
+  LEFT,
+  RIGHT,
+  TOP,
+  DOWN
+};
 
 class OutputManager {
 public:
@@ -30,6 +35,7 @@ public:
   void loadStats(int points, int8_t lives);
   void loadGameOver();
   void refreshPacman(int oldX,int oldY, int newX,int newY, int8_t curTexture, Direction curDir);
+  void refreshGhost(int oldX,int oldY, int newX,int newY, int color, bool eyeMode);
   void refreshPoints(int value);
 private:
   MCUFRIEND_kbv* tft;
