@@ -37,6 +37,7 @@ public:
   void refreshPacman(int oldX,int oldY, int newX,int newY, int8_t curTexture, Direction curDir);
   void refreshGhost(int oldX,int oldY, int newX,int newY, int color, bool eyeMode);
   void refreshPoints(int value);
+  void refreshLives(int8_t lives);
 private:
   MCUFRIEND_kbv* tft;
 };

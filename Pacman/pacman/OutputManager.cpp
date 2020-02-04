@@ -267,14 +267,7 @@ void OutputManager::loadStats(int points, int8_t lives){
 
   (*tft).setCursor(90, 290);
   (*tft).print(points);
-
-  (*tft).fillRect(180, 290, 59, 20 ,BLACK);
-  if (lives>=1)
-    (*tft).drawBitmap(180,290 , pacman1R,16,16, YELLOW);
-  if (lives>=2)
-    (*tft).drawBitmap(200,290 , pacman1R,16,16, YELLOW);
-  if (lives>=3)  
-    (*tft).drawBitmap(220,290 , pacman1R,16,16, YELLOW);
+  refreshLives(lives);
 }
 
 void OutputManager::refreshPacman(int oldX,int oldY, int newX,int newY, int8_t curTexture, Direction curDir){
@@ -360,7 +353,15 @@ void OutputManager::refreshPoints(int value){
   (*tft).setCursor(90, 290);
   (*tft).print(value);
 }
-
+void OutputManager::refreshLives(int8_t lives){
+  (*tft).fillRect(180, 290, 59, 20 ,BLACK);
+  if (lives>=1)
+    (*tft).drawBitmap(180,290 , pacman1R,16,16, YELLOW);
+  if (lives>=2)
+    (*tft).drawBitmap(200,290 , pacman1R,16,16, YELLOW);
+  if (lives>=3)  
+    (*tft).drawBitmap(220,290 , pacman1R,16,16, YELLOW);
+}
 
 void OutputManager::loadGameOver(){
   (*tft).fillScreen(BLACK);

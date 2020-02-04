@@ -19,44 +19,72 @@ void Enemy::startNewLevel(OutputManager& output){
   eyeMode = false;
   started = false;
   curDir = Direction::RIGHT;
-  output.refreshGhost(int(position.x*8),int(position.y*8), int(startPoint.x*8),int(startPoint.y*8), color, eyeMode);
-  position = startPoint;
+  output.refreshGhost(int(pos.x*8),int(pos.y*8), int(startPoint.x*8),int(startPoint.y*8), color, eyeMode);
+  pos = startPoint;
 }
 
 void Blinky::calculateDirection(double curX, double curY, Direction pacmanDir, uint8_t* pointMap) {
   double minDist = 3600000;
   Direction nextDir = curDir;
-  if (!border(char(position.x-0.126),char(position.y)) && 
-      !border(char(position.x-0.126),char(position.y + 0.875)) && (curDir!=Direction::LEFT)){
-    double dist = calculateDist(curX-0.125,curY, position.x, position.y);
+  char probDirs = 0;
+  if (!border(char(pos.x-0.126),char(pos.y)) && 
+      !border(char(pos.x-0.126),char(pos.y + 0.875)) && (curDir!=Direction::RIGHT)){
+    double dist = calculateDist(curX,curY, pos.x-0.125, pos.y);
     if (dist < minDist){
       nextDir = Direction::LEFT;
       minDist = dist;
     }
+    probDirs++;
   }
-  if (!border(char(position.x+1),char(position.y)) && 
-      !border(char(position.x+1),char(position.y + 0.875)) && (curDir!=Direction::RIGHT)){
-    double dist = calculateDist(curX+1,curY, position.x, position.y);
+  if (!border(char(pos.x+1),char(pos.y)) && 
+      !border(char(pos.x+1),char(pos.y + 0.875)) && (curDir!=Direction::LEFT)){
+    double dist = calculateDist(curX,curY, pos.x+1, pos.y);
     if (dist < minDist){
       nextDir = Direction::RIGHT;
       minDist = dist;
     }
+    probDirs++;
   }
-  if (!border(char(position.x),char(position.y - 0.125)) && 
-      !border(char(position.x+0.875),char(position.y - 0.125)) && (curDir!=Direction::TOP)){
-    double dist = calculateDist(curX,curY-0.125, position.x, position.y);
+  if (!border(char(pos.x),char(pos.y - 0.125)) && 
+      !border(char(pos.x+0.875),char(pos.y - 0.125)) && (curDir!=Direction::DOWN)){
+    double dist = calculateDist(curX,curY, pos.x, pos.y-0.125);
     if (dist < minDist){
       nextDir = Direction::TOP;
       minDist = dist;
     }
+    probDirs++;
   }
-  if (!border(char(position.x),char(position.y + 1.125)) && 
-      !border(char(position.x+0.875),char(position.y + 1.125)) && (curDir!=Direction::DOWN)){
-    double dist = calculateDist(curX,curY+1.125, position.x, position.y);
+  if (!border(char(pos.x),char(pos.y + 1.125)) && 
+      !border(char(pos.x+0.875),char(pos.y + 1.125)) && (curDir!=Direction::TOP)){
+    double dist = calculateDist(curX,curY, pos.x, pos.y+1.125);
     if (dist < minDist){
       nextDir = Direction::DOWN;
       minDist = dist;
     }
+    probDirs++;
   }
-  curDir = nextDir;
+  if (probDirs>=1)
+    curDir = nextDir;
+}
+
+void Enemy::move(OutputManager& output){
+  if (pos.x > 30.25)
+    pos.x -= 30;
+  if (pos.x < -1.25)
+    pos.x += 30;
+    
+  switch (curDir){
+    case Direction::LEFT:
+      output.refreshGhost(int((pos.x+speed)*8),int(pos.y*8),int((pos.x-=speed)*8),int(pos.y*8),color,eyeMode);
+      break;
+    case Direction::RIGHT:
+      output.refreshGhost(int((pos.x-speed)*8),int(pos.y*8),int((pos.x+=speed)*8),int(pos.y*8),color,eyeMode);
+      break;
+    case Direction::TOP:
+      output.refreshGhost(int(pos.x*8),int((pos.y+speed)*8),int(pos.x*8),int((pos.y-=speed)*8),color,eyeMode);
+      break;
+    case Direction::DOWN:
+      output.refreshGhost(int(pos.x*8),int((pos.y-speed)*8),int(pos.x*8),int((pos.y+=speed)*8),color,eyeMode);
+      break;
+  }
 }

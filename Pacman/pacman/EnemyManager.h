@@ -13,6 +13,7 @@ public:
   EnemyManager(OutputManager& om):output(om),blinky(),pinky(),inky(), clyde(){};
   void startNewLevel();
   void update(double curX, double curY, Direction curDir,uint8_t* pointMap,int dots);
+  Point getBlinkyPos(){ return blinky.getPosition(); };
 private:
   long long int time = 0;
   long long int frightenedTime = 0;

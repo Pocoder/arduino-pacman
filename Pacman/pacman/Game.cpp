@@ -143,6 +143,9 @@ void Game::update(TSPoint p){
     output.refreshPacman(curX*8,curY*8,14*8+4,27*8, curTexture, curDir);
     startNewLevel();
   }
+
+  if (int(EManager.getBlinkyPos().x) == int(curX) && int(EManager.getBlinkyPos().y) == int(curY))
+    death();
   
   ++curTexture %= 4;
   delay(30); //fps
@@ -166,10 +169,10 @@ void Game::death(){
     curDir = Direction::RIGHT;
     curX = 14.5;
     curY = 27;
-    output.loadStats(points, lives);
+    output.refreshLives(lives);
     EManager.startNewLevel();
     
-    output.oprint(117,167, "3");
+    /*output.oprint(117,167, "3");
     delay(1000);
     output.rect(80,163,80,10);
     output.oprint(117,167, "2");
@@ -180,7 +183,7 @@ void Game::death(){
     output.rect(80,163,80,10);
     output.oprint(114,167, "GO");
     delay(100);
-    output.rect(80,163,80,14);
+    output.rect(80,163,80,14);*/
   }
 }
 

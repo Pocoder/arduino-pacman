@@ -9,8 +9,9 @@ void EnemyManager::startNewLevel(){
   pinky.startNewLevel(output);
   inky.startNewLevel(output);
   clyde.startNewLevel(output);
-};
+}
 
 void EnemyManager::update(double curX, double curY, Direction curDir,uint8_t* pointMap,int dots){
   blinky.calculateDirection(curX, curY, curDir, pointMap);
+  blinky.move(output);
 }

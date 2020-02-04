@@ -16,11 +16,12 @@ struct Point {
 
 class Enemy {
 public:
+  void move(OutputManager& output);
   void calculateDirection();
   void startNewLevel(OutputManager& om);
   bool isStarted() { return started; };
-  Point getPosition(){ return position; };
-  void setPosition(Point newPos){ position = newPos; };
+  Point getPosition(){ return pos; };
+  void setPosition(Point newPos){ pos = newPos; };
 protected:
   bool eyeMode = false;
   Point startPoint;
@@ -31,7 +32,7 @@ protected:
   bool started = false; 
   long long int startDots;
   double speed = 0.25;
-  Point position;
+  Point pos;
   Direction curDir;
 };
 
