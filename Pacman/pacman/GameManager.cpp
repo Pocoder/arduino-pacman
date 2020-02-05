@@ -10,29 +10,29 @@ void GameManager::load() {
 //entering name
 void GameManager::enterName() {
   curState = State::ENTERING_NAME;
-  output.enterName(name);
+  output.enterName(name, nameSize);
 }
 void GameManager::dealKeyboard(TSPoint p) {
   if (p.x >= 240 - 96 && p.x <= 240 - 48 && p.y >= 320 - 24) { //backspace
-    name.backspace();
-    output.writeName(name);
+    name[nameSize--] ='\0';
+    output.writeName(name, nameSize);
   }
   else if (p.x > 240 - 48 && p.y >= 320 - 24) { //OK
     openMenu();
   }
-  else if (name.getSize() < 6) {
+  else if (nameSize < 6) {
     if (p.y >= 320 - 72) { //letters
       int x = p.x / 24;
       int y = (p.y - (320 - 72)) / 24;
       char c;
-      if (name.getSize() == 0) {
+      if (nameSize == 0) {
         c = 'A' + 10 * y + x;
       }
       else {
         c = 'a' + 10 * y + x;
       }
-      name.push(c);
-      output.writeName(name);
+      name[nameSize++] = c;
+      output.writeName(name, nameSize);
     }
   }
 }

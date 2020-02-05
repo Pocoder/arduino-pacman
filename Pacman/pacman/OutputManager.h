@@ -1,7 +1,6 @@
 #pragma once
 #include "Adafruit_GFX.h"
 #include <MCUFRIEND_kbv.h>
-#include "MyString.h"
 
 #define BLACK   0xFFFF
 #define BLUE    0xFFE0
@@ -26,8 +25,8 @@ public:
   void oprint(int x, int y, char* text);
   void rect(int x,int y, int width,int height);
   void load(); //loading screen
-  void enterName(MyString& name); //back of entering name
-  void writeName(MyString& name); //showing name
+  void enterName(char* name, int8_t size); //back of entering name
+  void writeName(char* name, int8_t size); //showing name
   void loadMenu();
   void loadSettings();
   void loadRecords();

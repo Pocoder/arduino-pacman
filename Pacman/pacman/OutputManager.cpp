@@ -57,7 +57,7 @@ void OutputManager::load() {
 }
 
 //entering name
-void OutputManager::enterName(MyString& name) {
+void OutputManager::enterName(char* name,int8_t nameSize) {
   (*tft).fillScreen(BLACK);
   (*tft).setCursor(83, 70);
   (*tft).setTextColor(YELLOW);
@@ -91,14 +91,14 @@ void OutputManager::enterName(MyString& name) {
   (*tft).setTextSize(2);
   (*tft).setTextColor(YELLOW);
   (*tft).print("OK");
-  writeName(name);
+  writeName(name, nameSize);
 }
-void OutputManager::writeName(MyString& name) {
+void OutputManager::writeName(char* name,int8_t nameSize) {
   (*tft).fillRect(0, 140, 240, 45, BLACK);
-  (*tft).setCursor(120 - name.getSize() * 8, 150);
+  (*tft).setCursor(120 - nameSize * 8, 150);
   (*tft).setTextColor(YELLOW);
   (*tft).setTextSize(3);
-  (*tft).println(name.str());
+  (*tft).println(name);
 }
 
 //load menu

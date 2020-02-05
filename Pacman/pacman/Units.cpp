@@ -33,7 +33,7 @@ void Blinky::calculateDirection(double curX, double curY, Direction pacmanDir, u
   Direction nextDir = curDir;
   if (!isBorder(char(pos.x-0.126),char(pos.y)) && 
       !isBorder(char(pos.x-0.126),char(pos.y + 0.875)) && (curDir!=Direction::RIGHT)){
-    double dist = calculateDist(curX,curY, pos.x-0.125, pos.y);
+    double dist = calculateDist(curX,curY, pos.x-1, pos.y);
     if (dist < minDist){
       nextDir = Direction::LEFT;
       minDist = dist;
@@ -49,7 +49,7 @@ void Blinky::calculateDirection(double curX, double curY, Direction pacmanDir, u
   }
   if (!isBorder(char(pos.x),char(pos.y - 0.125)) && 
       !isBorder(char(pos.x+0.875),char(pos.y - 0.125)) && (curDir!=Direction::DOWN)){
-    double dist = calculateDist(curX,curY, pos.x, pos.y-0.125);
+    double dist = calculateDist(curX,curY, pos.x, pos.y-1);
     if (dist < minDist){
       nextDir = Direction::TOP;
       minDist = dist;
@@ -57,7 +57,7 @@ void Blinky::calculateDirection(double curX, double curY, Direction pacmanDir, u
   }
   if (!isBorder(char(pos.x),char(pos.y + 1.125)) && 
       !isBorder(char(pos.x+0.875),char(pos.y + 1.125)) && (curDir!=Direction::TOP)){
-    double dist = calculateDist(curX,curY, pos.x, pos.y+1.125);
+    double dist = calculateDist(curX,curY, pos.x, pos.y+1);
     if (dist < minDist){
       nextDir = Direction::DOWN;
       minDist = dist;

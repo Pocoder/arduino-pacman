@@ -16,7 +16,8 @@ enum class State {
 class GameManager {
 public:
   GameManager(OutputManager& OM, InputManager& IM) :output(OM), input(IM), game(OM) {
-    name.copy("Player\0", 6);
+    name = new char[7];
+    name = "Player\0";
   };          //конструктор
 
   void load();            //заставка игры
@@ -30,6 +31,9 @@ public:
   void update();          //считывает нажатие и изменяет состояние игры
 
 private:
+  char* name;
+  int8_t nameSize = 6;
+  
   void dealKeyboard(TSPoint p);
   void dealMenuButtons(TSPoint p);
   void dealSettingsButtons(TSPoint p);
@@ -41,6 +45,6 @@ private:
   InputManager& input;
   
   Game game;
-  MyString name;
+  
   State curState;
 };
