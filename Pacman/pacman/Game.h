@@ -26,16 +26,16 @@ public:
 private:
   EnemyManager EManager;
   uint8_t* curPointsMap;
-  int8_t curTexture = 0;
+  int8_t curTexture;
   bool trouble = false;
-  Direction curDir = Direction::RIGHT;
-  Direction prevDir = Direction::RIGHT;
-  double curX = 14.5;
-  double curY = 27;
-  int points = 0;
-  uint8_t lives = 3;
-  uint8_t dots = 244;
-  bool gameOver = false;
+  Direction curDir;
+  Direction prevDir;
+  double curX;
+  double curY;
+  int points;
+  uint8_t lives;
+  uint8_t dots;
+  bool gameOver;
 
   int* ens;
   int* ensStart;

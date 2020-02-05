@@ -68,11 +68,10 @@ void OutputManager::enterName(char* name,int8_t nameSize) {
   int16_t BOXSIZE = 24;
   int16_t high = 320 - 72;
   char c = 'a';
+  (*tft).setTextSize(2);
   for (int16_t h = high; h <= 320 - 24; h += 24) {
     for (int16_t w = 0; w <= 240 - 24; w += 24) {
       (*tft).setCursor(w + 7, h + 4);
-      (*tft).setTextSize(2);
-      (*tft).setTextColor(YELLOW);
       (*tft).print(c);
       c++;
     }
@@ -81,15 +80,11 @@ void OutputManager::enterName(char* name,int8_t nameSize) {
   int16_t h = 320 - 24;
   (*tft).fillRect(w, h, BOXSIZE * 2, BOXSIZE, BLACK);
   (*tft).setCursor(w + 13, h + 5);
-  (*tft).setTextSize(2);
-  (*tft).setTextColor(YELLOW);
   (*tft).print("<-");
   w += 48;
   (*tft).fillRect(w, h, BOXSIZE * 2, BOXSIZE, BLACK);
   //(*tft).drawRect(w, h, BOXSIZE*2, BOXSIZE, 0x7777);
   (*tft).setCursor(w + 13, h + 5);
-  (*tft).setTextSize(2);
-  (*tft).setTextColor(YELLOW);
   (*tft).print("OK");
   writeName(name, nameSize);
 }
@@ -132,10 +127,13 @@ void OutputManager::loadSettings() {
   (*tft).setTextSize(3);
   (*tft).setTextColor(YELLOW);
   (*tft).print("SETTINGS");
-  //закрашиваем надписи "play" и "settings"
+  //закрашиваем надписи "play" и "settings" и
   (*tft).fillRect(121 - 24, 133, 50, 17, YELLOW);
   (*tft).fillRect(121 - 48, 208, 100, 17, YELLOW);
   (*tft).setTextSize(2);
+  (*tft).setCursor(121 - 2*6*2 , 260);
+  (*tft).print("MENU");
+  
   (*tft).setTextColor(BLACK);
   (*tft).setCursor(121 - 3 * 2 * 6, 125);
   (*tft).print("Change");
@@ -145,11 +143,6 @@ void OutputManager::loadSettings() {
   (*tft).print("Record");
   (*tft).setCursor(121 - 5 * 6, 216);
   (*tft).print("table");
-
-  (*tft).setCursor(121 - 2*6*2 , 260);
-  (*tft).setTextSize(2);
-  (*tft).setTextColor(YELLOW);
-  (*tft).print("MENU");
 }
 
 //load Records
@@ -172,8 +165,10 @@ bool isPoint(int8_t x, int8_t y){
 }
 
 void OutputManager::loadGame(){
+  
   (*tft).fillScreen(BLACK);
   //ramka
+  /*
   (*tft).drawFastVLine(8, 32, 247, BLUE);
   (*tft).drawFastVLine(10, 34, 243, BLUE);
   (*tft).drawFastVLine(229, 34, 243, BLUE);
@@ -182,7 +177,8 @@ void OutputManager::loadGame(){
   (*tft).drawFastHLine(10, 34, 219, BLUE);
   (*tft).drawFastHLine(10, 277, 219, BLUE);
   (*tft).drawFastHLine(8, 279,223, BLUE);
-
+  */
+  
   int radius = 3;
   (*tft).drawRoundRect(117, 34, 5, 32,radius, BLUE); // верхний центральный
   (*tft).drawRoundRect(8, 109, 42, 29,radius, BLUE); //левый верхний
@@ -191,8 +187,8 @@ void OutputManager::loadGame(){
   (*tft).drawRoundRect(189, 109, 42, 29,radius, BLUE); // првый вехрний
   (*tft).drawRoundRect(189, 157, 42, 29,radius, BLUE); // правый центральный
   (*tft).drawRoundRect(211, 229, 21, 5,radius, BLUE); // правый нижний
-  (*tft).fillRect(8, 139, 6,17 ,BLACK);
-  (*tft).fillRect(225, 139, 7, 17,BLACK);
+  //(*tft).fillRect(8, 139, 6,17 ,BLACK);
+  //(*tft).fillRect(225, 139, 7, 17,BLACK);
   
   //top rectangles
   (*tft).drawRoundRect(29, 53, 21, 13,radius, BLUE);
@@ -239,6 +235,7 @@ void OutputManager::loadGame(){
   (*tft).drawRoundRect(117, 229, 5, 29,radius, BLUE);
   (*tft).drawRoundRect(69, 229, 5, 29,radius, BLUE);
   (*tft).drawRoundRect(165, 229, 5, 29,radius, BLUE);
+  
 }
 
 void OutputManager::loadStats(int points, int8_t lives, int* energ){
@@ -271,7 +268,8 @@ void OutputManager::loadStats(int points, int8_t lives, int* energ){
 
 void OutputManager::refreshPacman(int oldX,int oldY, int newX,int newY, int8_t curTexture, Direction curDir){
   (*tft).drawBitmap(oldX-4, oldY-4, pacman3,16,16, BLACK);
-  if (curTexture == 0){
+  (*tft).drawBitmap(newX-4, newY-4, pacman3,16,16, YELLOW);
+  /*if (curTexture == 0){
     switch (curDir){
       case Direction::RIGHT:
         (*tft).drawBitmap(newX-4, newY-4, pacman2R,16,16, YELLOW);
@@ -334,7 +332,7 @@ void OutputManager::refreshPacman(int oldX,int oldY, int newX,int newY, int8_t c
         (*tft).drawBitmap(newX-4, newY-4, pacman1D,16,16, YELLOW);
         break;
     }
-  }
+  }*/
 }
 
 void OutputManager::refreshGhost(int oldX,int oldY, int newX,int newY, int color, bool eyeMode){

@@ -2,6 +2,7 @@
 void Game::refr(){
   curTexture = 3;
   curDir = Direction::RIGHT;
+  prevDir = curDir;
   curX = 14.5;
   curY = 27;
 }
@@ -19,7 +20,7 @@ void Game::moveFunc(Direction dir, double& curX, double& curY){
     case Direction::RIGHT:
       if (!isBorder(char(curX+1), char(curY))&& !isBorder(char(curX+1), char(curY+0.875))){
         output.refreshPacman(8*curX,8*curY,8*(curX+0.25),8*curY, curTexture, dir);
-        curX+=0.25;
+        curX+= 0.25;
         trouble = false;
       } else
         trouble = true;
@@ -115,7 +116,7 @@ void Game::start(){
 
 void Game::death(){
   lives--;
-  if (lives == 0)
+  if (lives <= 0)
     gameOver = true;
   else{
     output.refreshPacman(curX*8,curY*8,14*8+4,27*8, curTexture, curDir);
