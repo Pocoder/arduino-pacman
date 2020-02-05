@@ -1,10 +1,6 @@
 #include "Units.h"
 
-double calculateDist(double x1, double y1, double x2, double y2){
-  return (x2-x1)*(x2-x1)+(y2-y1)*(y2-y1);
-}
-
-bool border(char x, char y){
+bool isBorder(char x, char y){
   if (x<=0 && y==18)
     return false;
   if ((x<=0 || x>=28) && y!=18)
@@ -12,6 +8,10 @@ bool border(char x, char y){
   int num = 5*x + y/8;
   int8_t mask = 1<<(7-y%8);
   return bordersMap[num] & mask;
+}
+
+double calculateDist(double x1, double y1, double x2, double y2){
+  return (x2-x1)*(x2-x1)+(y2-y1)*(y2-y1);
 }
 
 void Enemy::calculateDirection();
@@ -26,45 +26,39 @@ void Enemy::startNewLevel(OutputManager& output){
 void Blinky::calculateDirection(double curX, double curY, Direction pacmanDir, uint8_t* pointMap) {
   double minDist = 3600000;
   Direction nextDir = curDir;
-  char probDirs = 0;
-  if (!border(char(pos.x-0.126),char(pos.y)) && 
-      !border(char(pos.x-0.126),char(pos.y + 0.875)) && (curDir!=Direction::RIGHT)){
+  if (!isBorder(char(pos.x-0.126),char(pos.y)) && 
+      !isBorder(char(pos.x-0.126),char(pos.y + 0.875)) && (curDir!=Direction::RIGHT)){
     double dist = calculateDist(curX,curY, pos.x-0.125, pos.y);
     if (dist < minDist){
       nextDir = Direction::LEFT;
       minDist = dist;
     }
-    probDirs++;
   }
-  if (!border(char(pos.x+1),char(pos.y)) && 
-      !border(char(pos.x+1),char(pos.y + 0.875)) && (curDir!=Direction::LEFT)){
+  if (!isBorder(char(pos.x+1),char(pos.y)) && 
+      !isBorder(char(pos.x+1),char(pos.y + 0.875)) && (curDir!=Direction::LEFT)){
     double dist = calculateDist(curX,curY, pos.x+1, pos.y);
     if (dist < minDist){
       nextDir = Direction::RIGHT;
       minDist = dist;
     }
-    probDirs++;
   }
-  if (!border(char(pos.x),char(pos.y - 0.125)) && 
-      !border(char(pos.x+0.875),char(pos.y - 0.125)) && (curDir!=Direction::DOWN)){
+  if (!isBorder(char(pos.x),char(pos.y - 0.125)) && 
+      !isBorder(char(pos.x+0.875),char(pos.y - 0.125)) && (curDir!=Direction::DOWN)){
     double dist = calculateDist(curX,curY, pos.x, pos.y-0.125);
     if (dist < minDist){
       nextDir = Direction::TOP;
       minDist = dist;
     }
-    probDirs++;
   }
-  if (!border(char(pos.x),char(pos.y + 1.125)) && 
-      !border(char(pos.x+0.875),char(pos.y + 1.125)) && (curDir!=Direction::TOP)){
+  if (!isBorder(char(pos.x),char(pos.y + 1.125)) && 
+      !isBorder(char(pos.x+0.875),char(pos.y + 1.125)) && (curDir!=Direction::TOP)){
     double dist = calculateDist(curX,curY, pos.x, pos.y+1.125);
     if (dist < minDist){
       nextDir = Direction::DOWN;
       minDist = dist;
     }
-    probDirs++;
   }
-  if (probDirs>=1)
-    curDir = nextDir;
+  curDir = nextDir;
 }
 
 void Enemy::move(OutputManager& output){

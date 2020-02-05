@@ -1,3 +1,4 @@
+#pragma once
 #include <TouchScreen.h>
 #include "OutputManager.h"
 #include "Textures.cpp"
@@ -7,6 +8,12 @@ class Game{
 public:
   Game(OutputManager& om):output(om), EManager(om){
     curPointsMap = new uint8_t[150];
+    ens = new int[4];
+    ensStart = new int[4];
+    ensStart[0] = (2<<8) + 7;
+    ensStart[1] = (2<<8) + 27;
+    ensStart[2] = (27<<8) + 7;
+    ensStart[3] = (27<<8) + 27;
   }
   bool isGameOver(){
     return gameOver;
@@ -33,10 +40,27 @@ private:
   uint8_t lives = 3;
   uint8_t dots = 244;
   bool gameOver = false;
-  
-  bool BPoint1 = true;
-  bool BPoint2 = true;
-  bool BPoint3 = true;
-  bool BPoint4 = true;
+
+  int* ens;
+  int* ensStart;
+
   OutputManager& output;
+  
+  void moveFunc(Direction dir,double&, double&);
+  
+  void account(){
+    for (int i = 1;i<=3;i++){
+      char* a = new char[2];
+      a[0] = i+'0';
+      a[1] = '\0';
+      output.oprint(117,167, a);
+      delay(1000);
+      output.rect(80,163,80,10);
+    }
+    //memory
+    //delete[] a;
+    output.oprint(114,167, "GO");
+    delay(200);
+    output.rect(80,163,80,14);
+  }
 };

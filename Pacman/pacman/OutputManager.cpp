@@ -241,7 +241,7 @@ void OutputManager::loadGame(){
   (*tft).drawRoundRect(165, 229, 5, 29,radius, BLUE);
 }
 
-void OutputManager::loadStats(int points, int8_t lives){
+void OutputManager::loadStats(int points, int8_t lives, int* energ){
   for (int8_t j = 0;j<40;j++){
     for (int8_t i = 0;i<15;i++){
       int x = 8*i+3;
@@ -252,10 +252,9 @@ void OutputManager::loadStats(int points, int8_t lives){
       }
     }
   }
-  (*tft).fillCircle(19, 59, 2, WHITE);
-  (*tft).fillCircle(220, 59, 2, WHITE);
-  (*tft).fillCircle(19, 219, 2, WHITE);
-  (*tft).fillCircle(220, 219, 2, WHITE);
+  for (int i=0;i<4;i++){
+    (*tft).fillCircle(((energ[i]>>8) * 8)+3,(((energ[i]<<8)>>8) * 8)+3, 2, WHITE);
+  }
 
   //pacman
   (*tft).drawBitmap(8*14, 8*27-4, pacman1R,16,16, YELLOW);

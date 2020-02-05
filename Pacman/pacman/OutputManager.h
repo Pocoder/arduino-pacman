@@ -32,7 +32,7 @@ public:
   void loadSettings();
   void loadRecords();
   void loadGame();
-  void loadStats(int points, int8_t lives);
+  void loadStats(int points, int8_t lives, int* energ);
   void loadGameOver();
   void refreshPacman(int oldX,int oldY, int newX,int newY, int8_t curTexture, Direction curDir);
   void refreshGhost(int oldX,int oldY, int newX,int newY, int color, bool eyeMode);

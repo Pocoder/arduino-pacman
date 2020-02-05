@@ -9,6 +9,8 @@
 #define ORANGE  0xFD00
 #define WHITE   0x0000
 
+bool isBorder(char x, char y);
+
 struct Point {
   double x;
   double y;
