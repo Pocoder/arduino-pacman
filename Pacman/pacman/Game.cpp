@@ -1,4 +1,10 @@
 #include "Game.h"
+void Game::refr(){
+  curTexture = 3;
+  curDir = Direction::RIGHT;
+  curX = 14.5;
+  curY = 27;
+}
 
 void Game::moveFunc(Direction dir, double& curX, double& curY){
   switch (dir){
@@ -38,17 +44,15 @@ void Game::moveFunc(Direction dir, double& curX, double& curY){
 }
 
 void Game::update(TSPoint p){
-  if (p.x>0 && p.x<120 && p.y<240 &&p.y>80){
-    curDir = Direction::LEFT;
-  }
-  if (p.x>120 && p.y<240 &&p.y>80){
-    curDir = Direction::RIGHT;
-  }
+
   if (p.y >0 && p.y<80){
     curDir = Direction::TOP;
-  }
-  if (p.y>240){
+  }else if (p.y>240){
     curDir = Direction::DOWN;
+  }else if (p.x<120 && p.x>0){
+    curDir = Direction::LEFT;
+  }else if (p.x>120){
+    curDir = Direction::RIGHT;
   }
   
   //teleport
@@ -97,7 +101,6 @@ void Game::update(TSPoint p){
   //death?
   if (int(EManager.getBlinkyPos().x) == int(curX) && int(EManager.getBlinkyPos().y) == int(curY))
     death();
-  
   ++curTexture %= 4;
   delay(30); //fps
 }
@@ -115,11 +118,8 @@ void Game::death(){
   if (lives == 0)
     gameOver = true;
   else{
-    curTexture = 0;
     output.refreshPacman(curX*8,curY*8,14*8+4,27*8, curTexture, curDir);
-    curDir = Direction::RIGHT;
-    curX = 14.5;
-    curY = 27;
+    refr();
     output.refreshLives(lives);
     EManager.startNewLevel();
     
@@ -128,8 +128,7 @@ void Game::death(){
 }
 
 void Game::startNewLevel(){
-  curTexture = 3;
-  curDir = Direction::RIGHT;
+  refr();
   for (int i = 0;i<4;i++)
     ens[i] = ensStart[i];
   
@@ -137,8 +136,6 @@ void Game::startNewLevel(){
     curPointsMap[i] = pointsMap[i];
   }
   dots = 244;
-  curX = 14.5;
-  curY = 27;
   output.loadStats(points, lives, ens);
   EManager.startNewLevel();
   

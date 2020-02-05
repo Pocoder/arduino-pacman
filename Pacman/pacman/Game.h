@@ -4,6 +4,7 @@
 #include "Textures.cpp"
 #include "EnemyManager.h"
 
+
 class Game{
 public:
   Game(OutputManager& om):output(om), EManager(om){
@@ -54,13 +55,14 @@ private:
       a[0] = i+'0';
       a[1] = '\0';
       output.oprint(117,167, a);
+      //delete[] a;
       delay(1000);
       output.rect(80,163,80,10);
     }
-    //memory
-    //delete[] a;
+    
     output.oprint(114,167, "GO");
     delay(200);
     output.rect(80,163,80,14);
   }
+  void refr();
 };
