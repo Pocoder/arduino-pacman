@@ -44,7 +44,6 @@ void Game::moveFunc(Direction dir, double& curX, double& curY){
 }
 
 void Game::update(TSPoint p){
-
   if (p.y >0 && p.y<80){
     curDir = Direction::TOP;
   }else if (p.y>240){
@@ -86,7 +85,7 @@ void Game::update(TSPoint p){
   }
   
   //POINTS
-  if (isPoint(uint8_t(curX),uint8_t(curY))){
+  if (isPoint(uint8_t(curX),uint8_t(curY), curPointsMap)){
     curPointsMap[5*uint8_t(curX) + uint8_t(curY)/8] &= ~(1<<(7-uint8_t(curY)%8));
     dots--;
     points+=10;

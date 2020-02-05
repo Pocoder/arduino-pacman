@@ -372,5 +372,8 @@ void OutputManager::loadGameOver(){
   (*tft).setTextSize(2);
   (*tft).setTextColor(BLACK);
   (*tft).print("MENU");
-  
+}
+
+void OutputManager::refreshDot(uint8_t x,uint8_t y){
+  (*tft).fillRect(8*x+3, 8*y+3,2,2, WHITE);
 }

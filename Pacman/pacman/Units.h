@@ -10,6 +10,7 @@
 #define WHITE   0x0000
 
 bool isBorder(char x, char y);
+bool isPoint(uint8_t x, uint8_t y, uint8_t* curPointsMap);
 
 struct Point {
   double x;
@@ -18,7 +19,7 @@ struct Point {
 
 class Enemy {
 public:
-  void move(OutputManager& output);
+  void move(OutputManager& output, uint8_t* pointMap);
   void calculateDirection();
   void startNewLevel(OutputManager& om);
   bool isStarted() { return started; };

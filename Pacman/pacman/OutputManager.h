@@ -38,6 +38,7 @@ public:
   void refreshGhost(int oldX,int oldY, int newX,int newY, int color, bool eyeMode);
   void refreshPoints(int value);
   void refreshLives(int8_t lives);
+  void refreshDot(uint8_t x,uint8_t y);
 private:
   MCUFRIEND_kbv* tft;
 };

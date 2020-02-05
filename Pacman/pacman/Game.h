@@ -26,11 +26,6 @@ public:
 private:
   EnemyManager EManager;
   uint8_t* curPointsMap;
-  bool isPoint(uint8_t x, uint8_t y){
-    uint8_t num = 5*x + y/8;
-    uint8_t mask = 1<<(7-y%8);
-    return curPointsMap[num] & mask;
-  }
   int8_t curTexture = 0;
   bool trouble = false;
   Direction curDir = Direction::RIGHT;

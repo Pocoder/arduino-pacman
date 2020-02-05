@@ -13,5 +13,5 @@ void EnemyManager::startNewLevel(){
 
 void EnemyManager::update(double curX, double curY, Direction curDir,uint8_t* pointMap,int dots){
   blinky.calculateDirection(curX, curY, curDir, pointMap);
-  blinky.move(output);
+  blinky.move(output, pointMap);
 }

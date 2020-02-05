@@ -9,6 +9,11 @@ bool isBorder(char x, char y){
   int8_t mask = 1<<(7-y%8);
   return bordersMap[num] & mask;
 }
+bool isPoint(uint8_t x, uint8_t y, uint8_t* curPointsMap){
+  uint8_t num = 5*x + y/8;
+  uint8_t mask = 1<<(7-y%8);
+  return curPointsMap[num] & mask;
+}
 
 double calculateDist(double x1, double y1, double x2, double y2){
   return (x2-x1)*(x2-x1)+(y2-y1)*(y2-y1);
@@ -61,12 +66,14 @@ void Blinky::calculateDirection(double curX, double curY, Direction pacmanDir, u
   curDir = nextDir;
 }
 
-void Enemy::move(OutputManager& output){
+void Enemy::move(OutputManager& output, uint8_t* pointMap){
   if (pos.x > 30.25)
     pos.x -= 30;
   if (pos.x < -1.25)
     pos.x += 30;
-    
+  uint8_t pointX = uint8_t(pos.x);
+  uint8_t pointY = uint8_t(pos.y);
+  
   switch (curDir){
     case Direction::LEFT:
       output.refreshGhost(int((pos.x+speed)*8),int(pos.y*8),int((pos.x-=speed)*8),int(pos.y*8),color,eyeMode);
@@ -81,4 +88,12 @@ void Enemy::move(OutputManager& output){
       output.refreshGhost(int(pos.x*8),int((pos.y-speed)*8),int(pos.x*8),int((pos.y+=speed)*8),color,eyeMode);
       break;
   }
+  if (isPoint(pointX-1,pointY,pointMap))
+    output.refreshDot(pointX-1,pointY);
+  if (isPoint(pointX+1,pointY,pointMap))
+    output.refreshDot(pointX+1,pointY);
+  if (isPoint(pointX,pointY-1,pointMap))
+    output.refreshDot(pointX,pointY-1);
+  if (isPoint(pointX,pointY+1,pointMap))
+    output.refreshDot(pointX,pointY+1);
 }
