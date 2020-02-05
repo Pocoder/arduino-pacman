@@ -377,3 +377,7 @@ void OutputManager::loadGameOver(){
 void OutputManager::refreshDot(uint8_t x,uint8_t y){
   (*tft).fillRect(8*x+3, 8*y+3,2,2, WHITE);
 }
+
+void OutputManager::drawBigPoint(uint8_t x,uint8_t y){
+  (*tft).fillCircle(x+3,y+3, 2, WHITE);
+}

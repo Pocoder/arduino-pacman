@@ -11,7 +11,7 @@ void EnemyManager::startNewLevel(){
   clyde.startNewLevel(output);
 }
 
-void EnemyManager::update(double curX, double curY, Direction curDir,uint8_t* pointMap,int dots){
+void EnemyManager::update(double curX, double curY, Direction curDir,uint8_t* pointMap,int dots,int* ens){
   blinky.calculateDirection(curX, curY, curDir, pointMap);
-  blinky.move(output, pointMap);
+  blinky.move(output, pointMap, ens);
 }

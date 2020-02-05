@@ -39,6 +39,7 @@ public:
   void refreshPoints(int value);
   void refreshLives(int8_t lives);
   void refreshDot(uint8_t x,uint8_t y);
+  void drawBigPoint(uint8_t x,uint8_t y);
 private:
   MCUFRIEND_kbv* tft;
 };

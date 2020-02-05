@@ -19,7 +19,7 @@ struct Point {
 
 class Enemy {
 public:
-  void move(OutputManager& output, uint8_t* pointMap);
+  void move(OutputManager& output, uint8_t* pointMap, int* energ);
   void calculateDirection();
   void startNewLevel(OutputManager& om);
   bool isStarted() { return started; };

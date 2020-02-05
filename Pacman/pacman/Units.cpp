@@ -66,7 +66,11 @@ void Blinky::calculateDirection(double curX, double curY, Direction pacmanDir, u
   curDir = nextDir;
 }
 
-void Enemy::move(OutputManager& output, uint8_t* pointMap){
+void Enemy::move(OutputManager& output, uint8_t* pointMap, int* energ){
+  for (int i=0;i<4;i++){
+    if (energ[i]!=0)
+      output.drawBigPoint((energ[i]>>8)*8,((energ[i]<<8)>>8)*8);
+  }
   if (pos.x > 30.25)
     pos.x -= 30;
   if (pos.x < -1.25)
@@ -96,4 +100,5 @@ void Enemy::move(OutputManager& output, uint8_t* pointMap){
     output.refreshDot(pointX,pointY-1);
   if (isPoint(pointX,pointY+1,pointMap))
     output.refreshDot(pointX,pointY+1);
+  
 }
