@@ -78,6 +78,7 @@ void Game::update(TSPoint p){
       ens[i] = 0;
       dots--;
       points += 50;
+      EManager.startFrightened();
       output.refreshPoints(points); 
     }
   }

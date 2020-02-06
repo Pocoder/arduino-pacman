@@ -45,19 +45,18 @@ private:
   void moveFunc(Direction dir,double&, double&);
   
   void account(){
-    for (int i = 1;i<=3;i++){
+    for (int i = 3;i>=1;i--){
       char* a = new char[2];
       a[0] = i+'0';
       a[1] = '\0';
       output.oprint(117,167, a);
       //delete[] a;
       delay(1000);
-      output.rect(80,163,80,10);
+      output.rect(80,165,80,10);
     }
-    
     output.oprint(114,167, "GO");
     delay(200);
-    output.rect(80,163,80,14);
+    output.rect(80,165,80,12);
   }
   void refr();
 };

@@ -14,7 +14,7 @@ void GameManager::enterName() {
 }
 void GameManager::dealKeyboard(TSPoint p) {
   if (p.x >= 240 - 96 && p.x <= 240 - 48 && p.y >= 320 - 24) { //backspace
-    name[nameSize--] ='\0';
+    name[--nameSize] ='\0';
     output.writeName(name, nameSize);
   }
   else if (p.x > 240 - 48 && p.y >= 320 - 24) { //OK

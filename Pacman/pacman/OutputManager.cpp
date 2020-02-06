@@ -210,12 +210,13 @@ void OutputManager::loadGame(){
   //(*tft).fillRect(164, 110, 5, 3,BLACK); 
 
   //prison
-  (*tft).drawRect(93, 133, 15, 3, WHITE);
-  (*tft).drawRect(93, 133, 3, 26, WHITE);
-  (*tft).drawRect(93, 157, 53, 3, WHITE);
-  (*tft).drawRect(131, 133, 15, 3, WHITE);
-  (*tft).drawRect(144, 133, 3, 26, WHITE);
 
+  (*tft).drawFastVLine(91, 133, 31, WHITE);
+  (*tft).drawFastVLine(148, 133, 31, WHITE);
+  (*tft).drawFastHLine(91, 133, 17, WHITE);
+  (*tft).drawFastHLine(131, 133,17, WHITE);
+  (*tft).drawFastHLine(91, 163, 57, WHITE);
+  
   //bot monogogranniki
   (*tft).drawRoundRect(69, 157, 5, 29,radius, BLUE); 
   (*tft).drawRoundRect(165, 157, 5, 29,radius, BLUE); 

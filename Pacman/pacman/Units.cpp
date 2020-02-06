@@ -1,5 +1,15 @@
 #include "Units.h"
 
+void Enemy::chase(){
+  state = GhostsState::Chase;
+}
+void Enemy::scatter(){
+  state = GhostsState::Scatter;
+}
+void Enemy::frightened(){
+  state = GhostsState::Frightened;
+}
+
 bool isBorder(char x, char y){
   if (x<=0 && y==18)
     return false;
@@ -19,7 +29,7 @@ double calculateDist(double x1, double y1, double x2, double y2){
   return (x2-x1)*(x2-x1)+(y2-y1)*(y2-y1);
 }
 
-void Enemy::calculateDirection();
+//void Enemy::calculateDirection(double curX, double curY, Direction pacmanDir, uint8_t* pointMap);
 void Enemy::startNewLevel(OutputManager& output){
   eyeMode = false;
   started = false;
@@ -28,7 +38,15 @@ void Enemy::startNewLevel(OutputManager& output){
   pos = startPoint;
 }
 
-void Blinky::calculateDirection(double curX, double curY, Direction pacmanDir, uint8_t* pointMap) {
+void Enemy::calculateDirection(double curX, double curY, Direction pacmanDir, uint8_t* pointMap) {
+  if (state == GhostsState::Scatter){
+    curX = homePoint.x;
+    curY = homePoint.y;
+  }
+  if (state == GhostsState::Frightened){
+    curX = random(30);
+    curY = random(40);
+  }
   double minDist = 3600000;
   Direction nextDir = curDir;
   if (!isBorder(char(pos.x-0.126),char(pos.y)) && 
@@ -66,7 +84,9 @@ void Blinky::calculateDirection(double curX, double curY, Direction pacmanDir, u
   curDir = nextDir;
 }
 
-void Enemy::move(OutputManager& output, uint8_t* pointMap, int* energ){
+void Enemy::move(OutputManager& output, uint8_t* pointMap, int* energ, int dots){
+  if (244 - dots < startDots)
+    return;
   for (int i=0;i<4;i++){
     if (energ[i]!=0)
       output.drawBigPoint((energ[i]>>8)*8,((energ[i]<<8)>>8)*8);
@@ -77,19 +97,22 @@ void Enemy::move(OutputManager& output, uint8_t* pointMap, int* energ){
     pos.x += 30;
   uint8_t pointX = uint8_t(pos.x);
   uint8_t pointY = uint8_t(pos.y);
-  
+
+  int col = color;
+  if (state == GhostsState::Frightened)
+    col = BLUE;
   switch (curDir){
     case Direction::LEFT:
-      output.refreshGhost(int((pos.x+speed)*8),int(pos.y*8),int((pos.x-=speed)*8),int(pos.y*8),color,eyeMode);
+      output.refreshGhost(int((pos.x+speed)*8),int(pos.y*8),int((pos.x-=speed)*8),int(pos.y*8),col,eyeMode);
       break;
     case Direction::RIGHT:
-      output.refreshGhost(int((pos.x-speed)*8),int(pos.y*8),int((pos.x+=speed)*8),int(pos.y*8),color,eyeMode);
+      output.refreshGhost(int((pos.x-speed)*8),int(pos.y*8),int((pos.x+=speed)*8),int(pos.y*8),col,eyeMode);
       break;
     case Direction::TOP:
-      output.refreshGhost(int(pos.x*8),int((pos.y+speed)*8),int(pos.x*8),int((pos.y-=speed)*8),color,eyeMode);
+      output.refreshGhost(int(pos.x*8),int((pos.y+speed)*8),int(pos.x*8),int((pos.y-=speed)*8),col,eyeMode);
       break;
     case Direction::DOWN:
-      output.refreshGhost(int(pos.x*8),int((pos.y-speed)*8),int(pos.x*8),int((pos.y+=speed)*8),color,eyeMode);
+      output.refreshGhost(int(pos.x*8),int((pos.y-speed)*8),int(pos.x*8),int((pos.y+=speed)*8),col,eyeMode);
       break;
   }
   if (isPoint(pointX-1,pointY,pointMap))
@@ -100,5 +123,4 @@ void Enemy::move(OutputManager& output, uint8_t* pointMap, int* energ){
     output.refreshDot(pointX,pointY-1);
   if (isPoint(pointX,pointY+1,pointMap))
     output.refreshDot(pointX,pointY+1);
-  
 }
