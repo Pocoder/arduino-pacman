@@ -25,7 +25,7 @@ enum class GhostsState{
 
 class Enemy {
 public:
-  void move(OutputManager& output, uint8_t* pointMap, int* energ, int dots);
+  void move(OutputManager& output, uint8_t* pointMap, int dots);
   void calculateDirection(double curX, double curY, Direction pacmanDir, uint8_t* pointMap);
   void startNewLevel(OutputManager& om);
   bool isStarted() { return started; };
@@ -95,7 +95,7 @@ public:
     startDots = 70;
     color = ORANGE;  
     startPoint = {16.5, 18};
-    homePoint = {8, 32};
+    homePoint = {9, 33};
   };
 private:
 };

@@ -84,13 +84,9 @@ void Enemy::calculateDirection(double curX, double curY, Direction pacmanDir, ui
   curDir = nextDir;
 }
 
-void Enemy::move(OutputManager& output, uint8_t* pointMap, int* energ, int dots){
+void Enemy::move(OutputManager& output, uint8_t* pointMap, int dots){
   if (244 - dots < startDots)
     return;
-  for (int i=0;i<4;i++){
-    if (energ[i]!=0)
-      output.drawBigPoint((energ[i]>>8)*8,((energ[i]<<8)>>8)*8);
-  }
   if (pos.x > 30.25)
     pos.x -= 30;
   if (pos.x < -1.25)

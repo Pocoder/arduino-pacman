@@ -62,8 +62,8 @@ void Game::update(TSPoint p){
     curX += 30;
 
   //death?
-  if (int(EManager.getBlinkyPos().x+0.5) == int(curX+0.5) && int(EManager.getBlinkyPos().y+0.5) == int(curY+0.5))
-    death();
+  //if (int(EManager.getBlinkyPos().x+0.5) == int(curX+0.5) && int(EManager.getBlinkyPos().y+0.5) == int(curY+0.5))
+  //  death();
   
   moveFunc(curDir, curX, curY);
   
@@ -97,14 +97,14 @@ void Game::update(TSPoint p){
   }
 
   //death?
-  if (int(EManager.getBlinkyPos().x+0.5) == int(curX+0.5) && int(EManager.getBlinkyPos().y+0.5) == int(curY+0.5))
-    death();
+  //if (int(EManager.getBlinkyPos().x+0.5) == int(curX+0.5) && int(EManager.getBlinkyPos().y+0.5) == int(curY+0.5))
+  //  death();
 
   //GHOSTS
   EManager.update(curX, curY, curDir, curPointsMap, dots, ens);
   
   ++curTexture %= 4;
-  delay(30); //fps
+  delay(10); //fps
 }
 
 void Game::start(){

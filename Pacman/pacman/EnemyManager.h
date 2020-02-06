@@ -4,8 +4,14 @@
 
 class EnemyManager{
 public:
-  EnemyManager(OutputManager& om):output(om),blinky(),pinky(),inky(), clyde(){
+  EnemyManager(OutputManager& om):output(om){
     timings = new long long int[8]; // чет - разбегание, нечет - преследование
+    ghosts = new Enemy*[4];
+    ghosts[0] = new Blinky();
+    ghosts[1] = new Pinky();
+    ghosts[2] = new Inky();
+    ghosts[3] = new Clyde();
+    
     timings[0] = 0;timings[1] = 7000;
     timings[2] = 27000;timings[3] = 34000;
     timings[4] = 54000;timings[5] = 59000;
@@ -14,17 +20,13 @@ public:
   void startNewLevel();
   void startFrightened(){ frightenedTime=0; frightened = true; };
   void update(double curX, double curY, Direction curDir,uint8_t* pointMap,int dots, int* ens);
-  Point getBlinkyPos(){ return blinky.getPosition(); };
 
   bool frightened = false;
 private:
+  Enemy** ghosts;
   long long int* timings;
   long long int time = 0;
   long long int frightenedTime;
   GhostsState curState = GhostsState::Scatter;
-  Blinky blinky;
-  Pinky pinky;
-  Inky inky;
-  Clyde clyde;
   OutputManager& output;
 };
