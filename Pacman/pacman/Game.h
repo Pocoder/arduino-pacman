@@ -58,5 +58,10 @@ private:
     delay(200);
     output.rect(80,165,80,12);
   }
+  void deathCheck(){
+    for (int8_t i = 0;i<4;i++)
+      if (int(EManager.getPosI(i).x +0.5) == int(curX+0.5) && int(EManager.getPosI(i).y+0.5) == int(curY+0.5) && !EManager.frightened)
+        death(); 
+  }
   void refr();
 };

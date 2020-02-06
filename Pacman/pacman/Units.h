@@ -28,7 +28,6 @@ public:
   void move(OutputManager& output, uint8_t* pointMap, int dots);
   void calculateDirection(double curX, double curY, Direction pacmanDir, uint8_t* pointMap);
   void startNewLevel(OutputManager& om);
-  bool isStarted() { return started; };
   Point getPosition(){ return pos; };
   void setPosition(Point newPos){ pos = newPos; };
 
@@ -36,6 +35,7 @@ public:
   void scatter();
   void frightened();
 protected:
+  bool inCage = true;
   GhostsState state = GhostsState::Scatter;
   bool eyeMode = false;
   Point startPoint;
@@ -43,11 +43,10 @@ protected:
   Point targetPoint;
   
   int color;
-  bool started = false; 
   long long int startDots;
   double speed = 0.25;
   Point pos;
-  Direction curDir;
+  Direction curDir = Direction::TOP;
 };
 
 //всегда преследует, разбегается в правый верхний угол

@@ -17,6 +17,7 @@ public:
     timings[4] = 54000;timings[5] = 59000;
     timings[6] = 79000;timings[7] = 84000;
   };
+  Point getPosI(int8_t value) { return ghosts[value]->getPosition(); };
   void startNewLevel();
   void startFrightened(){ frightenedTime=0; frightened = true; };
   void update(double curX, double curY, Direction curDir,uint8_t* pointMap,int dots, int* ens);

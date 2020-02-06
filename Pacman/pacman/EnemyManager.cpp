@@ -1,5 +1,6 @@
 #include "EnemyManager.h"
 
+
 void EnemyManager::startNewLevel(){
   time = 0;
   frightenedTime = 0;

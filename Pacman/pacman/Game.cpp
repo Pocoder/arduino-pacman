@@ -62,8 +62,7 @@ void Game::update(TSPoint p){
     curX += 30;
 
   //death?
-  //if (int(EManager.getBlinkyPos().x+0.5) == int(curX+0.5) && int(EManager.getBlinkyPos().y+0.5) == int(curY+0.5))
-  //  death();
+  deathCheck();
   
   moveFunc(curDir, curX, curY);
   
@@ -95,10 +94,8 @@ void Game::update(TSPoint p){
     output.refreshPacman(curX*8,curY*8,14*8+4,27*8, curTexture, curDir);
     startNewLevel();
   }
-
   //death?
-  //if (int(EManager.getBlinkyPos().x+0.5) == int(curX+0.5) && int(EManager.getBlinkyPos().y+0.5) == int(curY+0.5))
-  //  death();
+  deathCheck();
 
   //GHOSTS
   EManager.update(curX, curY, curDir, curPointsMap, dots, ens);
