@@ -81,7 +81,7 @@ public:
     startDots = 30;
     color = CYAN;
     startPoint = {12.5, 18};
-    homePoint = {21, 32};
+    homePoint = {25, 34};
   };
 private:
 };
@@ -94,7 +94,7 @@ public:
     startDots = 70;
     color = ORANGE;  
     startPoint = {16.5, 18};
-    homePoint = {9, 33};
+    homePoint = {8, 34};
   };
 private:
 };

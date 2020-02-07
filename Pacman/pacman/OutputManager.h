@@ -15,7 +15,8 @@ enum class Direction {
   LEFT,
   RIGHT,
   TOP,
-  DOWN
+  DOWN,
+  NONE
 };
 
 class OutputManager {

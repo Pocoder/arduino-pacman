@@ -114,7 +114,7 @@ void Game::start(){
 
 void Game::death(){
   lives--;
-  if (lives <= 0)
+  if (lives <= 0 || gameOver)
     gameOver = true;
   else{
     output.refreshPacman(curX*8,curY*8,14*8+4,27*8, curTexture, curDir);

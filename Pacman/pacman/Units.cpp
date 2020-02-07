@@ -32,7 +32,7 @@ double calculateDist(double x1, double y1, double x2, double y2){
 void Enemy::startNewLevel(OutputManager& output){
   inCage = true;
   eyeMode = false;
-  curDir = Direction::RIGHT;
+  curDir = Direction::NONE;
   output.refreshGhost(int(pos.x*8),int(pos.y*8), int(startPoint.x*8),int(startPoint.y*8), color, eyeMode);
   pos = startPoint;
 }
