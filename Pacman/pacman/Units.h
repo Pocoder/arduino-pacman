@@ -32,6 +32,7 @@ public:
   void setPosition(Point newPos){ pos = newPos; };
 
   void killed(OutputManager& output);
+  void revive(OutputManager& output);
   void chase();
   void scatter();
   void frightened();
@@ -42,7 +43,6 @@ protected:
   bool eyeMode = false;
   Point startPoint;
   Point homePoint;
-  //Point targetPoint;
   
   int color;
   long long int startDots;

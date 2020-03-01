@@ -16,6 +16,17 @@ void Enemy::killed(OutputManager& output){
   pos = startPoint;
 }
 
+void Enemy::revive(OutputManager& output){
+  if (!dead)
+    return;
+  else{
+    dead = false;
+    output.refreshGhost(int(pos.x*8),int(pos.y*8),int(14.5*8),int(15*8),color,eyeMode);
+    pos.x = 14.5;
+    pos.y = 15;
+  }
+}
+
 bool isBorder(char x, char y){
   if (x<=0 && y==18)
     return false;

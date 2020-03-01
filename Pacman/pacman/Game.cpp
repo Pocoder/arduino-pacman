@@ -7,39 +7,19 @@ void Game::refr(){
   curY = 27;
 }
 
-void Game::moveFunc(Direction dir, double& curX, double& curY){
+void Game::moveFunc(Direction dir){
   switch (dir){
     case Direction::LEFT:
-      if (!isBorder(char(curX-0.125),char(curY)) && !isBorder(char(curX-0.125),char(curY+0.875))){
-        output.refreshPacman(8*curX,8*curY,8*(curX-0.25),8*curY, curTexture, dir);
-        curX-=0.25;
-        trouble = false;
-      } else
-        trouble = true;
+      moveOptimisation(-0.125,0,-0.125,0.875,-0.25,0,dir);
       break;
     case Direction::RIGHT:
-      if (!isBorder(char(curX+1), char(curY))&& !isBorder(char(curX+1), char(curY+0.875))){
-        output.refreshPacman(8*curX,8*curY,8*(curX+0.25),8*curY, curTexture, dir);
-        curX+= 0.25;
-        trouble = false;
-      } else
-        trouble = true;
+      moveOptimisation(1,0,1,0.875,0.25,0,dir);
       break;
     case Direction::TOP:
-      if (!isBorder(char(curX),char(curY-0.125)) && !isBorder(char(curX+0.875),char(curY-0.125))){
-        output.refreshPacman(8*curX,8*curY,8*curX,8*(curY-0.25), curTexture, dir);
-        curY-=0.25;
-        trouble = false;
-      } else
-        trouble = true;
+      moveOptimisation(0,-0.125,0.875,-0.125,0,-0.25,dir);  
       break;
     case Direction::DOWN:
-      if (!isBorder(char(curX),char(curY+1.125)) && !isBorder(char(curX+0.875),char(curY+1.125))){
-        output.refreshPacman(8*curX,8*curY,8*curX,8*(curY+0.25), curTexture, dir);
-        curY+=0.25;
-        trouble = false;
-      } else
-        trouble = true;
+      moveOptimisation(0,1.125,0.875,1.125,0,0.25,dir);  
       break;
   }
 }
@@ -64,10 +44,10 @@ void Game::update(TSPoint p){
   //death?
   deathCheck();
   
-  moveFunc(curDir, curX, curY);
+  moveFunc(curDir);
   
   if (trouble){
-    moveFunc(prevDir, curX, curY); 
+    moveFunc(prevDir); 
   }else
     prevDir = curDir;
 
@@ -135,8 +115,8 @@ void Game::startNewLevel(){
     curPointsMap[i] = pointsMap[i];
   }
   dots = 244;
-  output.loadStats(points, lives, ens);
   EManager.startNewLevel();
+  output.loadStats(points, lives, ens);
   
   countdown();
 }

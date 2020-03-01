@@ -46,14 +46,14 @@ void OutputManager::load() {
   (*tft).println("A");
   (*tft).setTextColor(MAGENTA);
   (*tft).setCursor(170, 237);
-  (*tft).println("N");*/
+  (*tft).println("N");
   int curTexture = 0;
   Direction curDir = Direction::RIGHT;
   for (int i = 0; i < 160; i+=4) {
     refreshPacman(34+i,240,38+i,240, curTexture,curDir);
     ++curTexture %= 4;
     delay(80);
-  }
+  }*/
 }
 
 //entering name

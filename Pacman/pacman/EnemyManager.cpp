@@ -17,10 +17,12 @@ void EnemyManager::kill(int8_t i){
 void EnemyManager::update(double curX, double curY, Direction curDir,uint8_t* pointMap,int dots,int* ens){
   if (frightened){
     frightenedTime+=30;
-    for (int i = 0;i<4;i++)
-      ghosts[i]->frightened();
-    if (frightenedTime >= 5000)
+    if (frightenedTime >= 5000){
       frightened = false;
+      frightenedTime = 0;
+      for (int8_t i=0;i<4;i++)
+        ghosts[i]->revive(output);
+    }
   } else {
     time+=30;
     int j = 0;

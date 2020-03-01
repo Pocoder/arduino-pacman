@@ -42,7 +42,7 @@ private:
 
   OutputManager& output;
   
-  void moveFunc(Direction dir,double&, double&);
+  void moveFunc(Direction dir);
   
   void countdown(){
     for (int i = 3;i>=1;i--){
@@ -69,6 +69,15 @@ private:
           output.refreshPoints(points);
         }
       }
+  }
+  void moveOptimisation(float arg1,float arg2,float arg3,float arg4,float deltaX,float deltaY,Direction dir ){
+    if (!isBorder(char(curX+arg1),char(curY+arg2)) && !isBorder(char(curX+arg3),char(curY+arg4))){
+        output.refreshPacman(8*curX,8*curY,8*(curX+deltaX),8*(curY+deltaY), curTexture, dir);
+        curX+=deltaX;
+        curY+=deltaY;
+        trouble = false;
+      } else
+        trouble = true;
   }
   void refr();
 };
