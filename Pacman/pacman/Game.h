@@ -44,7 +44,7 @@ private:
   
   void moveFunc(Direction dir,double&, double&);
   
-  void account(){
+  void countdown(){
     for (int i = 3;i>=1;i--){
       char* a = new char[2];
       a[0] = i+'0';
@@ -60,8 +60,15 @@ private:
   }
   void deathCheck(){
     for (int8_t i = 0;i<4;i++)
-      if (int(EManager.getPosI(i).x +0.5) == int(curX+0.5) && int(EManager.getPosI(i).y+0.5) == int(curY+0.5) && !EManager.frightened)
-        death(); 
+      if (int(EManager.getPosI(i).x +0.5) == int(curX+0.5) && int(EManager.getPosI(i).y+0.5) == int(curY+0.5)){
+        if (!EManager.frightened)
+          death();
+        else{
+          EManager.kill(i);
+          points += 200;
+          output.refreshPoints(points);
+        }
+      }
   }
   void refr();
 };

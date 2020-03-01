@@ -213,8 +213,8 @@ void OutputManager::loadGame(){
 
   (*tft).drawFastVLine(91, 133, 31, WHITE);
   (*tft).drawFastVLine(148, 133, 31, WHITE);
-  (*tft).drawFastHLine(91, 133, 17, WHITE);
-  (*tft).drawFastHLine(131, 133,17, WHITE);
+  (*tft).drawFastHLine(91, 133, 57, WHITE);
+  //(*tft).drawFastHLine(131, 133,17, WHITE);
   (*tft).drawFastHLine(91, 163, 57, WHITE);
   
   //bot monogogranniki

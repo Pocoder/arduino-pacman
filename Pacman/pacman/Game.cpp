@@ -122,7 +122,7 @@ void Game::death(){
     output.refreshLives(lives);
     EManager.startNewLevel();
     
-    account();
+    countdown();
   }
 }
 
@@ -138,5 +138,5 @@ void Game::startNewLevel(){
   output.loadStats(points, lives, ens);
   EManager.startNewLevel();
   
-  account();
+  countdown();
 }

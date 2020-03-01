@@ -20,6 +20,7 @@ public:
   Point getPosI(int8_t value) { return ghosts[value]->getPosition(); };
   void startNewLevel();
   void startFrightened(){ frightenedTime=0; frightened = true; };
+  void kill(int8_t i);
   void update(double curX, double curY, Direction curDir,uint8_t* pointMap,int dots, int* ens);
 
   bool frightened = false;

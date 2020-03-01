@@ -10,6 +10,12 @@ void Enemy::frightened(){
   state = GhostsState::Frightened;
 }
 
+void Enemy::killed(OutputManager& output){
+  dead = true;
+  output.refreshGhost(int(pos.x*8),int(pos.y*8),int(startPoint.x*8),int(startPoint.y*8),color,eyeMode);
+  pos = startPoint;
+}
+
 bool isBorder(char x, char y){
   if (x<=0 && y==18)
     return false;
@@ -30,6 +36,7 @@ double calculateDist(double x1, double y1, double x2, double y2){
 }
 
 void Enemy::startNewLevel(OutputManager& output){
+  dead = false;
   inCage = true;
   eyeMode = false;
   curDir = Direction::NONE;
@@ -84,6 +91,8 @@ void Enemy::calculateDirection(double curX, double curY, Direction pacmanDir, ui
 }
 
 void Enemy::move(OutputManager& output, uint8_t* pointMap, int dots){
+  if (dead)
+    return;
   if (244 - dots < startDots)
     return;
   int col = color;

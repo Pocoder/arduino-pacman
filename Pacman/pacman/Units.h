@@ -31,16 +31,18 @@ public:
   Point getPosition(){ return pos; };
   void setPosition(Point newPos){ pos = newPos; };
 
+  void killed(OutputManager& output);
   void chase();
   void scatter();
   void frightened();
 protected:
+  bool dead = false;
   bool inCage = true;
   GhostsState state = GhostsState::Scatter;
   bool eyeMode = false;
   Point startPoint;
   Point homePoint;
-  Point targetPoint;
+  //Point targetPoint;
   
   int color;
   long long int startDots;

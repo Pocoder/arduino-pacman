@@ -10,6 +10,10 @@ void EnemyManager::startNewLevel(){
     ghosts[i]->startNewLevel(output);
 }
 
+void EnemyManager::kill(int8_t i){
+  ghosts[i]->killed(output); 
+}
+
 void EnemyManager::update(double curX, double curY, Direction curDir,uint8_t* pointMap,int dots,int* ens){
   if (frightened){
     frightenedTime+=30;
