@@ -97,10 +97,10 @@ void Game::death(){
   if (lives <= 0 || gameOver)
     gameOver = true;
   else{
+    EManager.startNewLevel();
     output.refreshPacman(curX*8,curY*8,14*8+4,27*8, curTexture, curDir);
     refr();
     output.refreshLives(lives);
-    EManager.startNewLevel();
     
     countdown();
   }
