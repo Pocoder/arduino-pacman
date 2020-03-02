@@ -23,6 +23,7 @@ public:
   void start();
   void death();
   void startNewLevel();
+  int getPoints(){ return points; };
 private:
   EnemyManager EManager;
   uint8_t* curPointsMap;

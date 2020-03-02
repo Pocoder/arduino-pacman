@@ -153,6 +153,17 @@ void OutputManager::loadRecords(){
   (*tft).setTextColor(YELLOW);
   (*tft).print("RECORDS");
   (*tft).setTextSize(2);
+
+  int* res = new int[6];
+  for (int8_t i = 0;i<6;i++){
+    if (eeprom_read_byte(i*10)==255)
+      break;
+    res[i] = eeprom_read_word(i*10+8);
+    (*tft).setCursor(120, 120+20*i);
+    (*tft).print(res[i]);
+  }
+  delete[] res;
+  
   (*tft).setCursor(121 - 2*6*2 , 260);
   (*tft).print("MENU");
 }
@@ -269,8 +280,8 @@ void OutputManager::loadStats(int points, int8_t lives, int* energ){
 
 void OutputManager::refreshPacman(int oldX,int oldY, int newX,int newY, int8_t curTexture, Direction curDir){
   (*tft).drawBitmap(oldX-4, oldY-4, pacman3,16,16, BLACK);
-  //(*tft).drawBitmap(newX-4, newY-4, pacman3,16,16, YELLOW);
-  if (curTexture == 0){
+  (*tft).drawBitmap(newX-4, newY-4, pacman3,16,16, YELLOW);
+  /*if (curTexture == 0){
     switch (curDir){
       case Direction::RIGHT:
         (*tft).drawBitmap(newX-4, newY-4, pacman2R,16,16, YELLOW);
@@ -333,7 +344,7 @@ void OutputManager::refreshPacman(int oldX,int oldY, int newX,int newY, int8_t c
         (*tft).drawBitmap(newX-4, newY-4, pacman1D,16,16, YELLOW);
         break;
     }
-  }
+  }*/
 }
 
 void OutputManager::refreshGhost(int oldX,int oldY, int newX,int newY, int color, bool eyeMode){

@@ -78,6 +78,7 @@ void GameManager::dealSettingsButtons(TSPoint p) {
 
 //records
 void GameManager::openRecords(){
+  output.loadRecords();
   curState = State::RECORDS;
 }
 void GameManager::dealRecordsButtons(TSPoint p){
@@ -93,15 +94,23 @@ void GameManager::startGame(){
 }
 void GameManager::dealGameButtons(TSPoint p){
   if (game.isGameOver()){
-    gameOver();
+    gameOver(game.getPoints());
   }else{
     game.update(p);
   }
 }
 
 //gameOver
-void GameManager::gameOver(){
+void GameManager::gameOver(int points){
   curState = State::GAME_OVER;
+  for (int8_t i = 6;i>=1;i--){
+    char* m = new char[10];
+    eeprom_read_block((void*)m, 10*(i-1), 10);
+    eeprom_write_block((void*)m, 10*i, 10);
+    delete[] m;
+  }
+  eeprom_write_block((void*)name, 0, nameSize+1);
+  eeprom_write_word(8, points);
   output.loadGameOver();
 }
 void GameManager::dealGameOverButtons(TSPoint p){

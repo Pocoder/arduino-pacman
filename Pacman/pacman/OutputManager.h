@@ -1,6 +1,7 @@
 #pragma once
 #include "Adafruit_GFX.h"
 #include <MCUFRIEND_kbv.h>
+#include <avr/eeprom.h>
 
 #define BLACK   0xFFFF
 #define BLUE    0xFFE0
