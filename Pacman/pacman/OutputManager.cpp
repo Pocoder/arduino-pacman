@@ -155,13 +155,25 @@ void OutputManager::loadRecords(){
   (*tft).setTextSize(2);
 
   int* res = new int[6];
+  char* curName = new char[7];
   for (int8_t i = 0;i<6;i++){
     if (eeprom_read_byte(i*10)==255)
       break;
+    int8_t k = 0;
+    byte cur = eeprom_read_byte(i*10);
+    while (cur!=255){
+      curName[k++] = cur;
+      cur = eeprom_read_byte(i*10 + k);
+    }
+    curName[k] = '\0';
+    (*tft).setCursor(20, 120+20*i);
+    (*tft).print(curName);
+    
     res[i] = eeprom_read_word(i*10+8);
-    (*tft).setCursor(120, 120+20*i);
+    (*tft).setCursor(170, 120+20*i);
     (*tft).print(res[i]);
   }
+  delete[] curName;
   delete[] res;
   
   (*tft).setCursor(121 - 2*6*2 , 260);

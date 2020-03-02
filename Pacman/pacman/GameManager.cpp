@@ -104,12 +104,16 @@ void GameManager::dealGameButtons(TSPoint p){
 void GameManager::gameOver(int points){
   curState = State::GAME_OVER;
   for (int8_t i = 6;i>=1;i--){
-    char* m = new char[10];
+    byte* m = new byte[10];
     eeprom_read_block((void*)m, 10*(i-1), 10);
     eeprom_write_block((void*)m, 10*i, 10);
     delete[] m;
   }
-  eeprom_write_block((void*)name, 0, nameSize+1);
+  for (int8_t i = 0;i<10;i++)
+    eeprom_write_byte(i,255);
+  for (int8_t i = 0;i<nameSize;i++)
+    eeprom_write_byte(i, name[i]);
+    
   eeprom_write_word(8, points);
   output.loadGameOver();
 }
